@@ -7,7 +7,7 @@ interface DashtemplateProps {
 
 const Dashtemplate: React.FC<DashtemplateProps> = ({ children }) => {
   return (
-    <div className="flex bg-secondary min-h-screen h-full ">
+    <div className="flex bg-secondaryColor min-h-screen h-full ">
       <Sidebar />
       <main className="border-2 h-full rounded-lg flex-1 p-6">{children}</main>
     </div>

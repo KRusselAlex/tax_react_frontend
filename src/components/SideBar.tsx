@@ -1,268 +1,223 @@
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 const Sidebar = () => {
+  const [widthSide, setWidthSide] = useState("18rem");
+  const [displaySide, setDisplaySide] = useState("flex");
+  const [itemsAlign, setItemsAlign] = useState("start");
+  const [show, setShow] = useState(true);
+
+  const history = useNavigate();
+
+  const mobileNavbar = () => {
+    setWidthSide("4rem");
+    setDisplaySide("none");
+    setShow(false);
+    setItemsAlign("center");
+  };
+
+  const desktopNavbar = () => {
+    setWidthSide("18rem");
+    setDisplaySide("flex");
+    setShow(true);
+    setItemsAlign("start");
+  };
+
+  //   const handleLogout = async () => {
+  //     history.push("/auth/login");
+  //   };
+
   return (
-    <aside className="w-64 bg-[#3d6d8c] text-white">
-      <div className="p-4 border-b border-gray-800">
-        <div className="flex items-center justify-between">
-          <img
-            src="https://tailwindflex.com/images/logo.svg"
-            alt="Logo"
-            className="h-8 w-auto"
-          />
-          <span className="text-xl font-bold">Admin Pro</span>
-        </div>
-      </div>
-
-      {/* <!-- Search Bar --> */}
-      <div className="p-4">
-        <div className="relative">
-          <input
-            type="text"
-            className="w-full bg-gray-800 text-white rounded-md pl-10 pr-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            placeholder="Search..."
-          />
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <svg
-              className="h-5 w-5 text-gray-500"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                clip-rule="evenodd"
-              />
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      <nav className="mt-5 px-2">
-        {/* <!-- Main Navigation --> */}
-        <div className="space-y-4">
-          {/* <!-- Dashboard --> */}
-          <a
-            href="#"
-            className="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg bg-gray-800 text-white group transition-all duration-200 hover:bg-gray-700"
+    <div
+      style={{ width: widthSide }}
+      className="flex flex-col gap-3 bg-[#3d6d8c] text-white  px-6"
+    >
+      <div className="flex items-center gap-2 border-2  px-4 py-2 rounded-xl justify-between">
+        <Link to="/" className="flex items-center gap-2 font-bold font-sans">
+          Jes.Group
+        </Link>
+        <button
+          className="text-[#343434] hover:text-primaryColor"
+          onClick={mobileNavbar}
+          style={{ display: show ? "block" : "none" }}
+        >
+          <svg
+            width="30px"
+            height="30px"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <svg
-              className="h-5 w-5 mr-3"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-              />
-            </svg>
-            Dashboard
-          </a>
+            <path
+              d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM13.79 15C14.08 15.29 14.08 15.77 13.79 16.06C13.64 16.21 13.45 16.28 13.26 16.28C13.07 16.28 12.88 16.21 12.73 16.06L9.2 12.53C8.91 12.24 8.91 11.76 9.2 11.47L12.73 7.94C13.02 7.65 13.5 7.65 13.79 7.94C14.08 8.23 14.08 8.71 13.79 9L10.79 12L13.79 15Z"
+              fill="#292D32"
+            />
+          </svg>
+        </button>
+        <button
+          className="text-[#343434] hover:text-primaryColor z-10"
+          onClick={desktopNavbar}
+          style={{ display: !show ? "block" : "none" }}
+        >
+          <svg
+            width="30px"
+            height="30px"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM14.79 12.53L11.26 16.06C11.11 16.21 10.92 16.28 10.73 16.28C10.54 16.28 10.35 16.21 10.2 16.06C9.91 15.77 9.91 15.29 10.2 15L13.2 12L10.2 9C9.91 8.71 9.91 8.23 10.2 7.94C10.49 7.65 10.97 7.65 11.26 7.94L14.79 11.47C15.09 11.76 15.09 12.24 14.79 12.53Z"
+              fill="#292D32"
+            />
+          </svg>
+        </button>
+      </div>
 
-          {/* <!-- Analytics Dropdown --> */}
-          <div className="space-y-1">
-            <button
-              className="w-full flex items-center justify-between px-4 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white focus:outline-none"
-              aria-expanded="true"
-              aria-controls="analytics-dropdown"
+      <div
+        style={{ alignItems: itemsAlign }}
+        className="flex flex-col h-full justify-between  py-5 text-gray-900"
+      >
+        <div>
+          <h3
+            style={{ display: displaySide }}
+            className="text-gray-500 font-sans"
+          >
+            Menu
+          </h3>
+          <ul
+            style={{ alignItems: itemsAlign }}
+            className="flex flex-col font-serif justify-center w-full gap-y-3 py-3"
+          >
+            <li className="w-full">
+              <Link
+                to="/dashboard"
+                className="px-4 py-2 text-gray-900 flex flex-row items-center w-full gap-4 border-gray-300 md:hover:bg-[#fff7ed] hover:font-bold hover:text-primaryColor bg-opacity-70 rounded-inputRadius"
+              >
+                <span>
+                  <svg
+                    width="20px"
+                    height="20px"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M2 12.2039C2 9.91549 2 8.77128 2.5192 7.82274C3.0384 6.87421 3.98695 6.28551 5.88403 5.10813L7.88403 3.86687C9.88939 2.62229 10.8921 2 12 2C13.1079 2 14.1106 2.62229 16.116 3.86687L18.116 5.10812C20.0131 6.28551 20.9616 6.87421 21.4808 7.82274C22 8.77128 22 9.91549 22 12.2039V13.725C22 17.6258 22 19.5763 20.8284 20.7881C19.6569 22 17.7712 22 14 22H10C6.22876 22 4.34315 22 3.17157 20.7881C2 19.5763 2 17.6258 2 13.725V12.2039Z"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                    />
+                    <path
+                      d="M15 18H9"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </span>
+
+                <span style={{ display: displaySide }}>General</span>
+              </Link>
+            </li>
+            <ul
+              style={{ alignItems: itemsAlign }}
+              className="flex flex-col font-serif justify-center w-full gap-y-3 py-3"
             >
-              <div className="flex items-center">
-                <svg
-                  className="h-5 w-5 mr-3"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+              <li className="w-full">
+                <Link
+                  to="/dashboard"
+                  className="px-4 py-2 text-gray-900 flex flex-row items-center w-full gap-4 border-gray-300 md:hover:bg-[#fff7ed] hover:font-bold hover:text-primaryColor bg-opacity-70 rounded-inputRadius"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                  />
-                </svg>
-                Analytics
-              </div>
-              <svg
-                className="ml-2 h-5 w-5 transform transition-transform duration-200"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-            </button>
-            <div className="space-y-1 pl-11" id="analytics-dropdown">
-              <a
-                href="#"
-                className="group flex items-center px-4 py-2 text-sm text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
-              >
-                Overview
-              </a>
-              <a
-                href="#"
-                className="group flex items-center px-4 py-2 text-sm text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
-              >
-                Reports
-              </a>
-              <a
-                href="#"
-                className="group flex items-center px-4 py-2 text-sm text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
-              >
-                Statistics
-              </a>
-            </div>
-          </div>
+                  <span>
+                    <svg
+                      width="20px"
+                      height="20px"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M2 12.2039C2 9.91549 2 8.77128 2.5192 7.82274C3.0384 6.87421 3.98695 6.28551 5.88403 5.10813L7.88403 3.86687C9.88939 2.62229 10.8921 2 12 2C13.1079 2 14.1106 2.62229 16.116 3.86687L18.116 5.10812C20.0131 6.28551 20.9616 6.87421 21.4808 7.82274C22 8.77128 22 9.91549 22 12.2039V13.725C22 17.6258 22 19.5763 20.8284 20.7881C19.6569 22 17.7712 22 14 22H10C6.22876 22 4.34315 22 3.17157 20.7881C2 19.5763 2 17.6258 2 13.725V12.2039Z"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                      />
+                      <path
+                        d="M15 18H9"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </span>
+                  <span style={{ display: displaySide }}>General</span>
+                </Link>
+              </li>
 
-          {/* <!-- Team Dropdown --> */}
-          <div className="space-y-1">
-            <button
-              className="w-full flex items-center justify-between px-4 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white focus:outline-none"
-              aria-expanded="false"
-              aria-controls="team-dropdown"
-            >
-              <div className="flex items-center">
-                <svg
-                  className="h-5 w-5 mr-3"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+              <li className="w-full">
+                <Link
+                  to="/profile"
+                  className="px-4 py-2 text-gray-900 flex flex-row items-center w-full gap-4 border-gray-300 md:hover:bg-[#fff7ed] hover:font-bold hover:text-primaryColor bg-opacity-70 rounded-inputRadius"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-                  />
-                </svg>
-                Team
-              </div>
-              <svg
-                className="ml-2 h-5 w-5 transform transition-transform duration-200"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-            </button>
-            <div className="hidden space-y-1 pl-11" id="team-dropdown">
-              <a
-                href="#"
-                className="group flex items-center px-4 py-2 text-sm text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
-              >
-                Members
-              </a>
-              <a
-                href="#"
-                className="group flex items-center px-4 py-2 text-sm text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
-              >
-                Calendar
-              </a>
-              <a
-                href="#"
-                className="group flex items-center px-4 py-2 text-sm text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
-              >
-                Settings
-              </a>
-            </div>
-          </div>
+                  <span>
+                    <svg
+                      width="20px"
+                      height="20px"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM13.79 15C14.08 15.29 14.08 15.77 13.79 16.06C13.64 16.21 13.45 16.28 13.26 16.28C13.07 16.28 12.88 16.21 12.73 16.06L9.2 12.53C8.91 12.24 8.91 11.76 9.2 11.47L12.73 7.94C13.02 7.65 13.5 7.65 13.79 7.94C14.08 8.23 14.08 8.71 13.79 9L10.79 12L13.79 15Z"
+                        fill="#292D32"
+                      />
+                    </svg>
+                  </span>
+                  <span style={{ display: displaySide }}>Profile</span>
+                </Link>
+              </li>
 
-          {/* <!-- Projects --> */}
-          <a
-            href="#"
-            className="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white group transition-all duration-200"
-          >
-            <svg
-              className="h-5 w-5 mr-3"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
-              />
-            </svg>
-            Projects
-          </a>
-
-          {/* <!-- Calendar --> */}
-          <a
-            href="#"
-            className="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white group transition-all duration-200"
-          >
-            <svg
-              className="h-5 w-5 mr-3"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-              />
-            </svg>
-            Calendar
-          </a>
-
-          {/* <!-- Documents --> */}
-          <a
-            href="#"
-            className="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white group transition-all duration-200"
-          >
-            <svg
-              className="h-5 w-5 mr-3"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-              />
-            </svg>
-            Documents
-          </a>
+              <li className="w-full">
+                <Link
+                  to="/settings"
+                  className="px-4 py-2 text-gray-900 flex flex-row items-center w-full gap-4 border-gray-300 md:hover:bg-[#fff7ed] hover:font-bold hover:text-primaryColor bg-opacity-70 rounded-inputRadius"
+                >
+                  <span>
+                    <svg
+                      width="20px"
+                      height="20px"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM13.79 15C14.08 15.29 14.08 15.77 13.79 16.06C13.64 16.21 13.45 16.28 13.26 16.28C13.07 16.28 12.88 16.21 12.73 16.06L9.2 12.53C8.91 12.24 8.91 11.76 9.2 11.47L12.73 7.94C13.02 7.65 13.5 7.65 13.79 7.94C14.08 8.23 14.08 8.71 13.79 9L10.79 12L13.79 15Z"
+                        fill="#292D32"
+                      />
+                    </svg>
+                  </span>
+                  <span style={{ display: displaySide }}>Settings</span>
+                </Link>
+              </li>
+            </ul>
+          </ul>
         </div>
-      </nav>
 
-      {/* <!-- User Profile --> */}
-      <div className="mt-auto p-4 border-t border-gray-800">
-        <div className="flex items-center">
-          <img
-            className="h-8 w-8 rounded-full"
-            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-            alt=""
-          />
-          <div className="ml-3">
-            <p className="text-sm font-medium text-white">Tom Cook</p>
-            <p className="text-xs text-gray-400">View profile</p>
-          </div>
+        <div>
+          <h3
+            style={{ display: displaySide }}
+            className="text-gray-500 font-sans"
+          >
+            Admin
+          </h3>
+          <ul
+            style={{ alignItems: itemsAlign }}
+            className="flex flex-col font-serif justify-center w-full gap-y-3 py-3"
+          >
+            {/* Admin Links */}
+          </ul>
         </div>
       </div>
-    </aside>
+    </div>
   );
 };
 

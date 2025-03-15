@@ -2,7 +2,7 @@ const Hero = () => {
   return (
     <div>
       {/* <!-- Middle Section --> */}
-      <section className="w-full flex items-center justify-center min-h-screen overflow-hidden bg-secondary">
+      <section className="w-full flex items-center justify-center min-h-screen overflow-hidden bg-secondaryColor">
         {/* <!-- Overlay for better text visibility --> */}
 
         {/* <!-- Content --> */}
