@@ -13,7 +13,7 @@ const Service = () => {
           <div className="bg-buttonColor rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:scale-105 animate-fade-in">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-12 w-12 text-white dark:text-indigo-400 mb-4"
+              className="h-12 w-12 text-white  mb-4"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -25,7 +25,7 @@ const Service = () => {
                 d="M12 3v9M12 15v4m4-4h-8"
               />
             </svg>
-            <h2 className="text-xl font-semibold text-white dark:text-white mb-2">
+            <h2 className="text-xl font-semibold text-white mb-2">
               Tax Preparation
             </h2>
             <p className="text-white">
@@ -38,7 +38,7 @@ const Service = () => {
           <div className="bg-buttonColor rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:scale-105 animate-fade-in">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-12 w-12 text-white dark:text-indigo-400 mb-4"
+              className="h-12 w-12 text-white  mb-4"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -50,7 +50,7 @@ const Service = () => {
                 d="M4 5h16M4 10h16M4 15h16M4 20h16"
               />
             </svg>
-            <h2 className="text-xl font-semibold text-white dark:text-white mb-2">
+            <h2 className="text-xl font-semibold text-white mb-2">
               Financial Planning
             </h2>
             <p className="text-white">
@@ -63,7 +63,7 @@ const Service = () => {
           <div className="bg-buttonColor rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:scale-105 animate-fade-in">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-12 w-12 text-white dark:text-indigo-400 mb-4"
+              className="h-12 w-12 text-white  mb-4"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -75,7 +75,7 @@ const Service = () => {
                 d="M8 7h12M8 11h12M8 15h12M8 19h12"
               />
             </svg>
-            <h2 className="text-xl font-semibold text-white dark:text-white mb-2">
+            <h2 className="text-xl font-semibold text-white mb-2">
               Bookkeeping
             </h2>
             <p className="text-white">
@@ -89,7 +89,7 @@ const Service = () => {
           <div className="bg-buttonColor rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:scale-105 animate-fade-in">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-12 w-12 text-white dark:text-indigo-400 mb-4"
+              className="h-12 w-12 text-white  mb-4"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -101,8 +101,8 @@ const Service = () => {
                 d="M9 3v2h6V3h-6zM3 7h18M3 17h18M3 12h18"
               />
             </svg>
-            <h2 className="text-xl font-semibold text-white dark:text-white mb-2">
-              Payroll Services
+            <h2 className="text-xl font-semibold text-white  mb-2">
+              Payroll Service
             </h2>
             <p className="text-white">
               Efficient payroll processing with compliance to tax regulations,
@@ -114,7 +114,7 @@ const Service = () => {
           <div className="bg-buttonColor rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:scale-105 animate-fade-in">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-12 w-12 text-white dark:text-indigo-400 mb-4"
+              className="h-12 w-12 text-white  mb-4"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -126,9 +126,7 @@ const Service = () => {
                 d="M9 5l3 3-3 3m0 0H3m6 0h6m4 4v4h-4m0 0H9"
               />
             </svg>
-            <h2 className="text-xl font-semibold text-white dark:text-white mb-2">
-              Auditing
-            </h2>
+            <h2 className="text-xl font-semibold text-white  mb-2">Auditing</h2>
             <p className="text-white">
               Our auditing services help businesses ensure their financial
               statements are accurate and compliant with the latest regulations.
@@ -139,7 +137,7 @@ const Service = () => {
           <div className="bg-buttonColor rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:scale-105 animate-fade-in">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-12 w-12 text-white dark:text-indigo-400 mb-4"
+              className="h-12 w-12 text-white  mb-4"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -151,7 +149,7 @@ const Service = () => {
                 d="M12 3v9M12 15v4m4-4h-8"
               />
             </svg>
-            <h2 className="text-xl font-semibold text-white dark:text-white mb-2">
+            <h2 className="text-xl font-semibold text-white  mb-2">
               Consultancy
             </h2>
             <p className="text-white">
