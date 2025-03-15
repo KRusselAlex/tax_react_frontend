@@ -9,6 +9,7 @@ import Testimonial from '../../components/Testimonial'
 import Contact from '../../components/Contact'
 import About from '../../components/About'
 import Features from '../../components/Features'
+import Frequently from "../../components/Frequently";
 // import CustomCarousel from '../../components/Carousel'
 
 
@@ -20,17 +21,17 @@ const Home = () => {
       <Hero />
       <Service />
       <Features />
-      <Progress/>
+      <Progress />
       <Testimonial />
       <About />
       <Contact />
       {/* <CustomCarousel /> */}
       {/* <LanguageSelector />
         <p>{ t("greeting")}</p> */}
+      <Frequently />
       <Footer />
-      
     </div>
-  )
+  );
 }
 
 export default Home

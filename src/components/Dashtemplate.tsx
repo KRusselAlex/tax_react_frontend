@@ -1,15 +1,25 @@
 import React, { ReactNode } from 'react';
 import Sidebar from './SideBar';
+import DashboardNavbar from "./NavDash";
 
 interface DashtemplateProps {
-  children: ReactNode; // Define the children type as ReactNode
+  children: ReactNode;
+  title: string;
+  description: string;
 }
 
-const Dashtemplate: React.FC<DashtemplateProps> = ({ children }) => {
+const Dashtemplate: React.FC<DashtemplateProps> = ({
+  children,
+  title,
+  description,
+}) => {
   return (
     <div className="flex bg-secondaryColor min-h-screen h-full ">
       <Sidebar />
-      <main className="border-2 h-full rounded-lg flex-1 p-6">{children}</main>
+      <div className="flex-1 h-full">
+        <DashboardNavbar title={title} description={description} />
+        <main className="">{children}</main>
+      </div>
     </div>
   );
 };
