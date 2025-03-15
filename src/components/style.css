@@ -1,0 +1,15 @@
+/* Tailwind Styling */
+.carousel-container {
+    width: 100%;
+    padding: 10px;
+}
+
+.carousel-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f7f1;
+    border-radius: 8px;
+    height: 200px;
+    margin: 0 10px;
+}
