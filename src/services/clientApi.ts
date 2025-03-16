@@ -2,10 +2,10 @@ import axiosInstance from "./axiosApi";
 
 
 // Create Client
-export const createClients = async (clientsData: { full_name: string; email: string; telephone_number: string; type_client: boolean }[]) => {
+export const createClients = async (clientsData: { full_name: string; email: string; telephone_number: string; type_client: boolean }[] | { full_name: string; email: string; telephone_number: string; type_client: boolean }) => {
     try {
         console.log("donner client", clientsData)
-        const response = await axiosInstance.post('/clients/', { clients: clientsData });
+        const response = await axiosInstance.post('/clients/', clientsData);
         return response.data; // Assuming the API returns the created clients or a success message
     } catch (error) {
         console.error('Error creating clients:', error);
@@ -36,7 +36,7 @@ export const getClientById = async (id: string) => {
 };
 
 // Update Client
-export const updateClient = async (id: string, clientData: { name: string; email: string; phone: string }) => {
+export const updateClient = async (id: number, clientData: { name: string; email: string; phone: string }) => {
     try {
         const response = await axiosInstance.put(`/clients/${id}`, clientData);
         return response.data;
@@ -47,7 +47,7 @@ export const updateClient = async (id: string, clientData: { name: string; email
 };
 
 // Delete Client
-export const deleteClient = async (id: string) => {
+export const deleteClient = async (id: number) => {
     try {
         const response = await axiosInstance.delete(`/clients/${id}`);
         return response.data;

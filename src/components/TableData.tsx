@@ -2,15 +2,24 @@ import { JSX, useState } from "react";
 import { FiFilter, FiArchive, FiTrash, FiSend } from "react-icons/fi";
 import { Dialog } from "@headlessui/react";
 import { HiDotsVertical } from "react-icons/hi";
-import { Clients } from "../types/Types";
+import sendReport from "../services/reportApi";
+import { toast } from "react-toastify";
+import { deleteClient } from "../services/clientApi";
+
+interface Client {
+  id: number;
+  full_name: string;
+  email: string;
+  telephone_number: string;
+
+  // Add any other fields here
+}
 
 interface ClientTableProps {
   title: string;
-  data: Clients;
+  data: Client[]; // Corrected type definition
   modalContent: JSX.Element;
 }
-
-
 
 interface ModalProps {
   isOpen: boolean;
@@ -50,7 +59,7 @@ export default function ClientTable({
   data,
   modalContent,
 }: ClientTableProps) {
-  const [clients, setClients] = useState(data);
+  const [clients, setClients] = useState<Client[]>(data); // Updated state type
   const [search, setSearch] = useState("");
   const [sortOrder, setSortOrder] = useState("asc");
   const [selectedClients, setSelectedClients] = useState<number[]>([]);
@@ -62,6 +71,7 @@ export default function ClientTable({
   const [isSendModalOpen, setIsSendModalOpen] = useState(false); // New state for Send modal
   const [reportFile, setReportFile] = useState<File | null>(null); // To store the uploaded PDF
   const itemsPerPage = 8;
+  const [uniqueClient, setUniqueClient] = useState(0);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSearch(e.target.value);
@@ -99,11 +109,17 @@ export default function ClientTable({
     setIsDeleteModalOpen(true);
   };
 
-  const confirmDelete = () => {
+  const confirmDelete = async () => {
     if (clientToDelete !== null) {
-      setClients(clients.filter((client) => client.id !== clientToDelete));
-      setIsDeleteModalOpen(false);
-      setClientToDelete(null);
+      setClients(clients?.filter((client) => client.id !== clientToDelete));
+      const response = await deleteClient(clientToDelete);
+      console.log(response);
+      if (response.success == true) {
+        console.log("je suis ici");
+        toast.success("Client deleted successfully!");
+        setIsDeleteModalOpen(false);
+        setClientToDelete(null);
+      }
     }
   };
 
@@ -127,15 +143,35 @@ export default function ClientTable({
   );
 
   const handleSendModalOpen = (id: number) => {
-    console.log(id);
+    setUniqueClient(id);
     setIsSendModalOpen(true); // Open the Send modal
   };
 
-  const handleSendReport = () => {
+  const handleSendReport = async () => {
     if (reportFile) {
       // Logic to upload or process the report file
       console.log("Report sent: ", reportFile);
+
+      console.log(uniqueClient, reportFile);
+
+      try {
+        const response = await sendReport({
+          clients: uniqueClient,
+          file: reportFile,
+        });
+
+        if (response.success === true) {
+          toast.success("Report sent successfully!"); // Success toast
+        } else {
+          toast.error("Failed to send report. Please try again."); // Error toast
+        }
+      } catch (error) {
+        toast.error("An error occurred while sending the report.");
+        console.log(error); // Error toast
+      }
       setIsSendModalOpen(false); // Close the modal after sending
+    } else {
+      toast.error("Please upload a report file."); // Error toast if no file is uploaded
     }
   };
 
@@ -247,9 +283,9 @@ export default function ClientTable({
             <button
               key={page}
               onClick={() => setCurrentPage(page + 1)}
-              className={`px-3 py-2 rounded ${
+              className={`px-3 py-1 rounded ${
                 currentPage === page + 1
-                  ? "bg-blue-600 text-white"
+                  ? "bg-primary text-white"
                   : "bg-gray-300"
               }`}
             >
@@ -289,7 +325,7 @@ export default function ClientTable({
           <p>Are you sure you want to delete this client?</p>
           <button
             onClick={confirmDelete}
-            className="px-4 py-2 bg-red-600 text-white rounded"
+            className="px-4 py-2 mt-2 bg-red-600 text-white rounded-full"
           >
             Delete
           </button>
@@ -302,8 +338,8 @@ export default function ClientTable({
       </Modal>
 
       <Modal isOpen={isViewModalOpen} onClose={() => setIsViewModalOpen(false)}>
-        <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg w-96 shadow-lg">
+        <div className="  flex justify-center items-center ">
+          <div className="bg-white p-6 rounded-lg w-96 ">
             <button
               className="absolute top-2 right-2 text-gray-600 hover:text-gray-900"
               onClick={() => setIsViewModalOpen(false)}

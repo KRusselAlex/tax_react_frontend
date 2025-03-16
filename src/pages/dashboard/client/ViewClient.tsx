@@ -15,6 +15,7 @@ const ViewClient = () => {
     const fetchClients = async () => {
       try {
         const response = await getClients(); // Replace with your API endpoint
+        console.log("data", response.data);
         setClients(response.data);
       } catch (error) {
         setError("Error fetching clients");
@@ -51,11 +52,15 @@ const ViewClient = () => {
         title="Manage Clients"
         description="Aperçu des statistiques et performances"
       >
-        <ClientTable
-          title="Add Client"
-          data={clients}
-          modalContent={<ClientForm />}
-        />
+        {clients ? (
+          <ClientTable
+            title="Add Client"
+            data={clients}
+            modalContent={<ClientForm />}
+          />
+        ) : (
+          <>There is no Clients </>
+        )}
       </Dashtemplate>
     </div>
   );

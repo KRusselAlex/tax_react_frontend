@@ -2,6 +2,7 @@ import { useState } from "react";
 import Papa from "papaparse"; // for parsing CSV files
 import { createClients } from "../../services/clientApi";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 type Client = {
   full_name: string;
@@ -23,6 +24,7 @@ const ClientForm = () => {
   const [csvFile, setCsvFile] = useState<File | null>(null);
   const [csvData, setCsvData] = useState<CSVRow[]>([]);
   const [isCsvParsed, setIsCsvParsed] = useState<boolean>(false); // State to track if CSV is parsed
+  const navigate = useNavigate();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     if (e.target.files) {
@@ -51,7 +53,7 @@ const ClientForm = () => {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent): void => {
+  const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     if (isManualEntry) {
       // Manual entry submission logic
@@ -62,6 +64,11 @@ const ClientForm = () => {
         type_client: clientType,
       };
       console.log("Adding client:", newClient);
+      const response = await createClients(newClient);
+      if (response.success) {
+        console.log("created");
+        toast.success("Client added successfully!");
+      }
 
       // Add your logic to send this data to the API
     } else {
@@ -80,6 +87,7 @@ const ClientForm = () => {
       if (response.success) {
         console.log("created");
         toast.success("Client added successfully!");
+        navigate("/dashboard/client");
       }
     }
   };

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import backG from "../../assets/acount.jpeg";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../services/authApi";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -38,6 +39,10 @@ const Login = () => {
       console.log(response);
       if (response == true) {
         navigate("/dashboard");
+
+        toast.success("Login successfully!");
+      } else {
+        toast.error("Wrong Credentials!");
       }
     }
   };
