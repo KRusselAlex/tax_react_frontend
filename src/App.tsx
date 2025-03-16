@@ -10,6 +10,7 @@ import ClientRemind from "./pages/reminder/ClientRemind";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ProtectedRoute } from "./services/ProtectedRoutes";
+import { ProtectedLogin } from "./services/ProtectLogin";
 
 function App() {
   return (
@@ -17,7 +18,15 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/auth/login" element={<Login />} />
+
+          <Route
+            path="/auth/login"
+            element={
+              <ProtectedLogin>
+                <Login />
+              </ProtectedLogin>
+            }
+          />
 
           <Route
             path="/dashboard"
