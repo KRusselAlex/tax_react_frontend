@@ -45,12 +45,12 @@ export default function Navbar() {
         <div className="max-w-[110em] mx-auto px-4 sm:px-6 py-6 lg:px-8">
           <div className="flex justify-between  items-center">
             {/* Logo */}
-            <h1 className="text-lg md:text-4xl font-bold text-gray-800">
+            <h1 className="text-lg md:text-2xl 2xl:text-4xl font-bold text-gray-800">
               jes.group
             </h1>
 
             {/* Desktop Menu */}
-            <div className="hidden md:flex space-x-6 xl:mt-2 md:text-lg xl:text-3xl">
+            <div className="hidden md:flex space-x-6 xl:mt-2 md:text-lg  xl:text-xl 2x:text-2xl">
               <a href="#home" className="text-gray-700  hover:text-blue-500">
                 Home
               </a>
