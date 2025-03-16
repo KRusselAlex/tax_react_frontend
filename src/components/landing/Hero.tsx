@@ -2,7 +2,7 @@ const Hero = () => {
   return (
     <div>
       {/* <!-- Middle Section --> */}
-      <section className="w-full flex items-center justify-center min-h-screen overflow-hidden bg-secondaryColor">
+      <section className="w-full flex items-center justify-center h-full overflow-hidden bg-secondaryColor">
         {/* <!-- Content --> */}
         <div className="relative z-10 container mx-auto px-1 md:px-16 text-center text-gray-800">
           <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
@@ -33,7 +33,7 @@ const Hero = () => {
             data-aos-delay="400"
           >
             <a
-              href="#services"
+              href="#contact"
               rel="noopener noreferrer"
               className="relative flex items-center justify-center px-6 py-3 bg-buttonColor hover:bg-buttonHover text-white text-lg font-semibold rounded-full shadow-lg transform hover:scale-105 transition-transform duration-200"
             >

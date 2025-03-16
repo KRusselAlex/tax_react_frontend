@@ -16,8 +16,11 @@ const Home = () => {
   // const { t } = useTranslation()
   return (
     <div>
-      <Navbar />
-      <Hero />
+      <div className="min-h-screen h-full">
+        <Navbar />
+        <Hero />
+      </div>
+
       <Service />
       <Features />
       <Progress />
