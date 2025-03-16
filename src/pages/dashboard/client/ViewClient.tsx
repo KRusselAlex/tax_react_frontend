@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 const ViewClient = () => {
   const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [filteredClients, setFilteredClient] = useState([]);
   const [error, setError] = useState("");
 
   // Fetch clients when the component mounts
@@ -17,6 +18,10 @@ const ViewClient = () => {
         const response = await getClients(); // Replace with your API endpoint
         console.log("data", response.data);
         setClients(response.data);
+        const dataFilter = clients.filter(
+          (client) => client.type_client && !client.report_sent
+        );
+        setFilteredClient(dataFilter);
       } catch (error) {
         setError("Error fetching clients");
         console.log(error);

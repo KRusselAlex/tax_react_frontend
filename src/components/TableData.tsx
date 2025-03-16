@@ -70,6 +70,9 @@ export default function ClientTable({
   const [reportFile, setReportFile] = useState<File | null>(null); // To store the uploaded PDF
   const itemsPerPage = 8;
   const [uniqueClient, setUniqueClient] = useState(0);
+  const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(
+    null
+  );
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSearch(e.target.value);
@@ -121,36 +124,46 @@ export default function ClientTable({
     }
   };
 
- const handleEdit = async (id: number, key: string, value: string) => {
-   // Update the client state locally by mapping over the clients and updating the specific client
-   const updatedClients = clients.map((client) =>
-     client.id === id ? { ...client, [key]: value } : client
-   );
+  const handleEdit = async (id: number, key: string, value: string) => {
+    // Update the client state locally by mapping over the clients and updating the specific client
+    const updatedClients = clients.map((client) =>
+      client.id === id ? { ...client, [key]: value } : client
+    );
 
-   // Set the updated clients state
-   setClients(updatedClients);
+    // Set the updated clients state
+    setClients(updatedClients);
 
-   // Find the updated client
-   const updatedClient = updatedClients.find((client) => client.id === id);
+    // Find the updated client
+    const updatedClient = updatedClients.find((client) => client.id === id);
 
-   if (updatedClient) {
-     try {
-       // Send the updated client data to the backend via the updateClient function
-       const response = await updateClient(updatedClient.id, updatedClient);
+    if (updatedClient) {
+      // Clear the previous timeout if one exists
+      if (typingTimeout) {
+        clearTimeout(typingTimeout);
+      }
 
-       // Handle the response if necessary
-       if (response.success) {
-         toast.success("Client updated successfully!");
-       } else {
-         toast.error("Failed to update client.");
-       }
-     } catch (error) {
-       console.error("Error updating client:", error);
-       toast.error("An error occurred while updating the client.");
-     }
-   }
- };
+      // Set a new timeout to trigger after 500ms (you can adjust the debounce time)
+      const timeout = setTimeout(async () => {
+        try {
+          // Send the updated client data to the backend via the updateClient function
+          const response = await updateClient(updatedClient.id, updatedClient);
 
+          // Handle the response if necessary
+          if (response.success) {
+            toast.success("Client updated successfully!");
+          } else {
+            toast.error("Failed to update client.");
+          }
+        } catch (error) {
+          console.error("Error updating client:", error);
+          toast.error("An error occurred while updating the client.");
+        }
+      }, 3000); // Adjust the delay (in ms) to suit your needs
+
+      // Save the timeout reference
+      setTypingTimeout(timeout);
+    }
+  };
 
   const filteredClients = clients.filter((c) =>
     Object.values(c).some((value) =>

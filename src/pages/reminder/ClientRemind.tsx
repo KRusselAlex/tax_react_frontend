@@ -21,7 +21,6 @@ const ClientRemind = () => {
       full_name: "Mike Johnson",
       email: "mike@example.com",
       telephone_number: "456-789-1234",
-      telephone_numbers: "123-456-7890",
     },
     {
       id: 4,
