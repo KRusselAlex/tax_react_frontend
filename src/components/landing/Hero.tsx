@@ -5,7 +5,7 @@ const Hero = () => {
       <section className="w-full flex items-center justify-center h-full  bg-secondaryColor">
         {/* <!-- Content --> */}
         <div className="relative z-10 container mx-auto px-1 md:px-16 text-center text-gray-800">
-          <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
+          <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-4xl md:text-6xl lg:text-7xl">
             Elevate Your{" "}
             <span className="relative whitespace-nowrap text-[#a3c3d6]">
               <svg
