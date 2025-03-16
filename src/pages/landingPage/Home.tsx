@@ -18,7 +18,7 @@ const Home = () => {
     <div>
       <div className="min-h-screen h-full flex flex-col">
         <Navbar />
-        <Hero className="flex-grow" />
+        <Hero />
       </div>
 
       <Service />
