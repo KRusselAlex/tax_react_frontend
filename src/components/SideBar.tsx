@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { LayoutDashboard, Users, Settings, LogOut, Bell } from "lucide-react";
+import { logout } from "../services/authApi";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const location = useLocation();
@@ -8,12 +10,18 @@ const Sidebar = () => {
   const [displaySide, setDisplaySide] = useState("flex");
   const [itemsAlign, setItemsAlign] = useState("start");
   const [show, setShow] = useState(true);
+  const navigate = useNavigate();
 
   const mobileNavbar = () => {
     setWidthSide("4rem");
     setDisplaySide("none");
     setShow(false);
     setItemsAlign("center");
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate("auth/login");
   };
 
   const desktopNavbar = () => {
@@ -100,7 +108,10 @@ const Sidebar = () => {
             </li>
           ))}
         </ul>
-        <button className="px-4 py-2 flex flex-row  items-center w-full gap-4 rounded-full text-white hover:bg-[#fff7ed] hover:font-bold hover:text-third">
+        <button
+          className="px-4 py-2 flex flex-row  items-center w-full gap-4 rounded-full text-white hover:bg-[#fff7ed] hover:font-bold hover:text-third"
+          onClick={handleLogout}
+        >
           <LogOut size={20} />
           <span style={{ display: displaySide }}>Logout</span>
         </button>

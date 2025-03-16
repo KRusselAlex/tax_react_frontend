@@ -1,5 +1,6 @@
 import { Bell, LogOut } from "lucide-react";
-// import Avatar from "../assets/1.jpeg";
+import { logout } from "../services/authApi";
+import { useNavigate } from "react-router-dom";
 
 interface DashboardNavbarProps {
   title: string;
@@ -10,6 +11,12 @@ export default function DashboardNavbar({
   title,
   description,
 }: DashboardNavbarProps) {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("auth/login");
+  };
   return (
     <nav className="flex items-center py-4  bg-secondaryColor justify-between">
       <div>
@@ -62,8 +69,23 @@ export default function DashboardNavbar({
           </div>
         </div>
         <Bell className="w-6 h-6 text-gray-600 cursor-pointer hover:text-gray-900" />
-        <img src="./" />
-        <LogOut className="w-6 h-6 text-red-500 cursor-pointer hover:text-red-700" />
+        <span>
+          {" "}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            width="30"
+            height="30"
+          >
+            <path d="M12 12c2.5 0 4.5-2 4.5-4.5S14.5 3 12 3 7.5 5 7.5 7.5 9.5 12 12 12zM12 14c-2.5 0-7.5 1.5-7.5 4.5v2h15v-2c0-3-5-4.5-7.5-4.5z" />
+          </svg>
+        </span>
+        <LogOut
+          className="w-6 h-6 text-red-500 cursor-pointer hover:text-red-700"
+          onClick={handleLogout}
+        />
       </div>
     </nav>
   );
