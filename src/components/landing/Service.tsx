@@ -2,13 +2,13 @@ const Service = () => {
   return (
     <div id="service" className="bg-white">
       <main className="container mx-auto px-6 py-8 min-h-screen h-full flex flex-col justify-center">
-        <h1 className="text-4xl font-bold text-center text-gray-900 mb-12 animate-fade-in">
+        <h1 className="text-2xl   md:text-3xl 2xl:text-4xl font-bold text-center text-gray-900 mb-12 animate-fade-in">
           Our Accounting Services
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Tax Preparation Service */}
-          <div className="bg-buttonColor rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:scale-105 animate-fade-in">
+          <div className="bg-buttonColor flex flex-col justify-center items-center md:items-start md:justify-start rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:scale-105 animate-fade-in">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-12 w-12 text-white  mb-4"
@@ -26,14 +26,14 @@ const Service = () => {
             <h2 className="text-xl font-semibold text-white mb-2">
               Tax Preparation
             </h2>
-            <p className="text-white">
+            <p className="text-white text-center md:text-start">
               We provide professional tax preparation services to ensure you
               comply with all tax laws while minimizing your tax liability.
             </p>
           </div>
 
           {/* Financial Planning */}
-          <div className="bg-buttonColor rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:scale-105 animate-fade-in">
+          <div className="bg-buttonColor rounded-xl flex flex-col justify-center items-center md:items-start md:justify-start  shadow-lg p-8 transform transition-all duration-300 hover:scale-105 animate-fade-in">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-12 w-12 text-white  mb-4"
@@ -51,14 +51,14 @@ const Service = () => {
             <h2 className="text-xl font-semibold text-white mb-2">
               Financial Planning
             </h2>
-            <p className="text-white">
+            <p className="text-white text-center md:text-start">
               We help you manage your financial goals with personalized
               strategies to grow your wealth and secure your future.
             </p>
           </div>
 
           {/* Bookkeeping */}
-          <div className="bg-buttonColor rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:scale-105 animate-fade-in">
+          <div className="bg-buttonColor rounded-xl shadow-lg p-8 transform flex flex-col justify-center items-center md:items-start md:justify-start  transition-all duration-300 hover:scale-105 animate-fade-in">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-12 w-12 text-white  mb-4"
@@ -76,7 +76,7 @@ const Service = () => {
             <h2 className="text-xl font-semibold text-white mb-2">
               Bookkeeping
             </h2>
-            <p className="text-white">
+            <p className="text-white  text-center md:text-start">
               Keep track of your business transactions and finances with
               accurate bookkeeping services to ensure proper financial
               reporting.
@@ -84,7 +84,7 @@ const Service = () => {
           </div>
 
           {/* Payroll Services */}
-          <div className="bg-buttonColor rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:scale-105 animate-fade-in">
+          <div className="bg-buttonColor rounded-xl shadow-lg flex flex-col justify-center items-center md:items-start md:justify-start p-8 transform transition-all duration-300 hover:scale-105 animate-fade-in">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-12 w-12 text-white  mb-4"
@@ -102,14 +102,14 @@ const Service = () => {
             <h2 className="text-xl font-semibold text-white  mb-2">
               Payroll Service
             </h2>
-            <p className="text-white">
+            <p className="text-white text-center md:text-start ">
               Efficient payroll processing with compliance to tax regulations,
               ensuring employees are paid on time with accurate deductions.
             </p>
           </div>
 
           {/* Auditing Services */}
-          <div className="bg-buttonColor rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:scale-105 animate-fade-in">
+          <div className="bg-buttonColor rounded-xl flex flex-col justify-center items-center md:items-start md:justify-start  shadow-lg p-8 transform transition-all duration-300 hover:scale-105 animate-fade-in">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-12 w-12 text-white  mb-4"
@@ -125,14 +125,14 @@ const Service = () => {
               />
             </svg>
             <h2 className="text-xl font-semibold text-white  mb-2">Auditing</h2>
-            <p className="text-white">
+            <p className="text-white text-center md:text-start">
               Our auditing services help businesses ensure their financial
               statements are accurate and compliant with the latest regulations.
             </p>
           </div>
 
           {/* Consultancy Services */}
-          <div className="bg-buttonColor rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:scale-105 animate-fade-in">
+          <div className="bg-buttonColor rounded-xl shadow-lg flex flex-col justify-center items-center md:items-start md:justify-start  p-8 transform transition-all duration-300 hover:scale-105 animate-fade-in">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-12 w-12 text-white  mb-4"
@@ -150,7 +150,7 @@ const Service = () => {
             <h2 className="text-xl font-semibold text-white  mb-2">
               Consultancy
             </h2>
-            <p className="text-white">
+            <p className="text-white text-center md:text-start">
               Our expert consultants provide tailored advice on financial
               management, tax planning, and more, ensuring your business
               thrives.

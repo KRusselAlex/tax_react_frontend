@@ -29,7 +29,7 @@ const Features = () => {
               </span>
             </div>
             <div className="mt-6 flex flex-col items-center md:items-start justify-center md:justify-start ">
-              <h2 className="text-3xl font-bold tracking-tight text-white">
+              <h2 className="text-3xl font-bold tracking-tight text-center md:text-start  text-white">
                 Automated Financial Management
               </h2>
               <p className="mt-4 text-lg text-center md:text-start text-gray-300">
@@ -82,10 +82,10 @@ const Features = () => {
               </span>
             </div>
             <div className="mt-6 flex flex-col items-center  md:items-start justify-center md:justify-start">
-              <h2 className="text-3xl font-bold tracking-tight text-white">
+              <h2 className="text-3xl font-bold tracking-tight text-center md:text-start text-white">
                 Tax Optimization
               </h2>
-              <p className="mt-4 text-lg text-gray-300">
+              <p className="mt-4 text-lg text-center md:text-start text-gray-300">
                 Our team of expert accountants helps businesses and individuals
                 navigate tax complexities. From identifying deductions and
                 credits to ensuring compliance with the latest tax laws, we
@@ -140,11 +140,11 @@ const Features = () => {
                   </svg>
                 </span>
               </div>
-              <div className="mt-6 flex flex-col items-center md:items-start justify-center md:justify-start ">
-                <h2 className="text-3xl font-bold tracking-tight text-white">
+              <div className="mt-6 flex flex-col items-center md:items-start w-full justify-center md:justify-start ">
+                <h2 className="text-3xl font-bold tracking-tight text-center md:text-start text-white">
                   Tax Optimization
                 </h2>
-                <p className="mt-4 text-lg text-center md:text-start text-gray-300">
+                <p className="mt-4 text-lg flex justify-center w-full text-center md:text-start md:justify-start text-gray-300">
                   Our team of expert accountants helps businesses and
                   individuals navigate tax complexities. From identifying
                   deductions and credits to ensuring compliance with the latest
