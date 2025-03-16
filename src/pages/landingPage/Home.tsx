@@ -1,17 +1,16 @@
-import { useTranslation } from 'react-i18next'
-import LanguageSelector from '../../components/Language-selector'
-import Navbar from '../../components/Navbar'
-import Footer from '../../components/Footer'
-import Hero from '../../components/Hero'
-import Service from '../../components/Service'
-import Progress from '../../components/Progress'
-import Testimonial from '../../components/Testimonial'
-import Contact from '../../components/Contact'
-import About from '../../components/About'
-import Features from '../../components/Features'
-import Frequently from "../../components/Frequently";
+// import { useTranslation } from 'react-i18next'
+// import LanguageSelector from '../../components/Language-selector'
+import Navbar from "../../components/landing/Navbar";
+import Footer from "../../components/landing/Footer";
+import Hero from "../../components/Hero";
+import Service from "../../components/Service";
+import Progress from "../../components/Progress";
+import Testimonial from "../../components/Testimonial";
+import Contact from "../../components/landing/Contact";
+import About from "../../components/landing/About";
+import Features from "../../components/landing/Features";
+import Frequently from "../../components/landing/Frequently";
 // import CustomCarousel from '../../components/Carousel'
-
 
 const Home = () => {
   // const { t } = useTranslation()
@@ -32,6 +31,6 @@ const Home = () => {
       <Footer />
     </div>
   );
-}
+};
 
-export default Home
+export default Home;
