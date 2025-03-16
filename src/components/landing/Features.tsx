@@ -28,7 +28,7 @@ const Features = () => {
                 </svg>
               </span>
             </div>
-            <div className="mt-6 flex flex-col items-center justify-center md:justify-start">
+            <div className="mt-6 flex flex-col items-center md:items-start justify-center md:justify-start ">
               <h2 className="text-3xl font-bold tracking-tight text-white">
                 Automated Financial Management
               </h2>
@@ -81,7 +81,7 @@ const Features = () => {
                 </svg>
               </span>
             </div>
-            <div className="mt-6 flex flex-col items-center justify-center md:justify-start">
+            <div className="mt-6 flex flex-col items-center  md:items-start justify-center md:justify-start">
               <h2 className="text-3xl font-bold tracking-tight text-white">
                 Tax Optimization
               </h2>
@@ -140,7 +140,7 @@ const Features = () => {
                   </svg>
                 </span>
               </div>
-              <div className="mt-6 flex flex-col items-center justify-center md:justify-start ">
+              <div className="mt-6 flex flex-col items-center md:items-start justify-center md:justify-start ">
                 <h2 className="text-3xl font-bold tracking-tight text-white">
                   Tax Optimization
                 </h2>
