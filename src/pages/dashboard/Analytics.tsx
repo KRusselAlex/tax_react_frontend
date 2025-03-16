@@ -1,4 +1,3 @@
-import React from "react";
 import Dashtemplate from "../../components/dashboard/Dashtemplate";
 import { BarChart } from "@mui/x-charts/BarChart";
 import { LineChart } from "@mui/x-charts/LineChart";

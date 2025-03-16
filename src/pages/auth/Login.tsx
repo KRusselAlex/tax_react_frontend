@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import backG from "../../assets/acount.jpeg";
+import { useNavigate } from "react-router-dom";
+import { login } from "../../services/authApi";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     // Simple form validation
@@ -30,8 +33,12 @@ const Login = () => {
     setErrors(newErrors);
 
     if (formIsValid) {
-      // Handle form submission (e.g., call an API)
       console.log("Form is valid, submitting...");
+      const response = await login(email, password);
+      console.log(response);
+      if (response == true) {
+        navigate("/dashboard");
+      }
     }
   };
 
@@ -45,7 +52,7 @@ const Login = () => {
 
         <div className="p-6 sm:p-12">
           <a href="../index.html" className="cursor-pointer">
-            <img src="../assets/logo.jpg" className="mx-auto" alt="Logo" />
+            Jes.Group
           </a>
           <div className="mt-12 flex flex-col items-center">
             <div className="max-w-md w-full flex justify-start">

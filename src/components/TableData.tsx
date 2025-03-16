@@ -9,12 +9,18 @@ interface ClientTableProps {
   modalContent: JSX.Element;
 }
 
-  const clientDatas= {
-    name: "John Doe",
-    email: "johndoe@example.com",
-    phone: "+123456789",
-    lastReport: "2025-03-10", // Last report date
-  };
+interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+}
+
+const clientDatas = {
+  name: "John Doe",
+  email: "johndoe@example.com",
+  phone: "+123456789",
+  lastReport: "2025-03-10", // Last report date
+};
 
 const Modal = ({ isOpen, onClose, children }: ModalProps) => {
   return (
@@ -23,7 +29,10 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
         <div className="bg-white p-6 rounded-lg shadow-lg">
           {children}
           <div className="flex justify-end mt-4">
-            <button onClick={onClose} className="px-4 py-2 bg-gray-300 rounded-full">
+            <button
+              onClick={onClose}
+              className="px-4 py-2 bg-gray-300 rounded-full"
+            >
               Close
             </button>
           </div>
@@ -46,7 +55,7 @@ export default function ClientTable({
   const [currentPage, setCurrentPage] = useState(1);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [clientToDelete, setClientToDelete] = useState<number | null>(null);
-  const [isViewModalOpen, setIsViewModalOpen] = useState(false); 
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
   const [isSendModalOpen, setIsSendModalOpen] = useState(false); // New state for Send modal
   const [reportFile, setReportFile] = useState<File | null>(null); // To store the uploaded PDF
   const itemsPerPage = 8;
@@ -73,8 +82,6 @@ export default function ClientTable({
     setClientToDelete(id);
     setIsViewModalOpen(true);
   };
-
-
 
   const handleSelectAll = () => {
     if (selectedClients.length === clients.length) {
@@ -117,6 +124,7 @@ export default function ClientTable({
   );
 
   const handleSendModalOpen = (id: number) => {
+    console.log(id);
     setIsSendModalOpen(true); // Open the Send modal
   };
 

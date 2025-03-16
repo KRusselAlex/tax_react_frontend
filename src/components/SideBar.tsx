@@ -1,13 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import {
-  LayoutDashboard,
-  FileText,
-  Users,
-  Settings,
-  LogOut,
-  Bell,
-} from "lucide-react";
+import { LayoutDashboard, Users, Settings, LogOut, Bell } from "lucide-react";
 
 const Sidebar = () => {
   const location = useLocation();

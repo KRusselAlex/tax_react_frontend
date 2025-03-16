@@ -1,5 +1,3 @@
-import React from 'react'
-
 const About = () => {
   return (
     <div>
@@ -53,6 +51,6 @@ const About = () => {
       </section>
     </div>
   );
-}
+};
 
-export default About
+export default About;
