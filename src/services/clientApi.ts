@@ -36,7 +36,7 @@ export const getClientById = async (id: string) => {
 };
 
 // Update Client
-export const updateClient = async (id: number, clientData: { name: string; email: string; phone: string }) => {
+export const updateClient = async (id: number, clientData: { full_name: string; email: string; telephone_number: string }) => {
     try {
         const response = await axiosInstance.put(`/clients/${id}`, clientData);
         return response.data;

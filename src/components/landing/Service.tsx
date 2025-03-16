@@ -165,13 +165,13 @@ const Service = () => {
             href="#team"
             className="cursor-pointer  rounded-full bg-buttonColor hover:bg-buttonHover text-white py-3 px-8"
           >
-            Rencontrez notre équipe
+            Meet the team
           </a>
           <a
             href="#contact"
             className="cursor-pointer rounded-full border-2 py-3 px-8 border-buttonColor text-buttonColor hover:bg-buttonHover hover:text-white transition duration-300 ease-in-out"
           >
-            Contactez-nous
+            Contact - Us
           </a>
         </div>
       </main>

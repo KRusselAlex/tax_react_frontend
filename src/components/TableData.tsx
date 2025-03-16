@@ -4,15 +4,13 @@ import { Dialog } from "@headlessui/react";
 import { HiDotsVertical } from "react-icons/hi";
 import sendReport from "../services/reportApi";
 import { toast } from "react-toastify";
-import { deleteClient } from "../services/clientApi";
+import { deleteClient, updateClient } from "../services/clientApi";
 
 interface Client {
   id: number;
   full_name: string;
   email: string;
   telephone_number: string;
-
-  // Add any other fields here
 }
 
 interface ClientTableProps {
@@ -123,13 +121,36 @@ export default function ClientTable({
     }
   };
 
-  const handleEdit = (id: number, key: string, value: string) => {
-    setClients(
-      clients.map((client) =>
-        client.id === id ? { ...client, [key]: value } : client
-      )
-    );
-  };
+ const handleEdit = async (id: number, key: string, value: string) => {
+   // Update the client state locally by mapping over the clients and updating the specific client
+   const updatedClients = clients.map((client) =>
+     client.id === id ? { ...client, [key]: value } : client
+   );
+
+   // Set the updated clients state
+   setClients(updatedClients);
+
+   // Find the updated client
+   const updatedClient = updatedClients.find((client) => client.id === id);
+
+   if (updatedClient) {
+     try {
+       // Send the updated client data to the backend via the updateClient function
+       const response = await updateClient(updatedClient.id, updatedClient);
+
+       // Handle the response if necessary
+       if (response.success) {
+         toast.success("Client updated successfully!");
+       } else {
+         toast.error("Failed to update client.");
+       }
+     } catch (error) {
+       console.error("Error updating client:", error);
+       toast.error("An error occurred while updating the client.");
+     }
+   }
+ };
+
 
   const filteredClients = clients.filter((c) =>
     Object.values(c).some((value) =>
@@ -243,7 +264,7 @@ export default function ClientTable({
                     <td key={key} className="p-2 border-gray-300">
                       <input
                         type="text"
-                        value={client[key]}
+                        value={client[key as keyof Client]}
                         onChange={(e) =>
                           handleEdit(client.id, key, e.target.value)
                         }
