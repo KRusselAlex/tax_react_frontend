@@ -1,11 +1,13 @@
 import { useState } from "react";
 import Papa from "papaparse"; // for parsing CSV files
+import { createClients } from "../../services/clientApi";
+import { toast } from "react-toastify";
 
 type Client = {
-  name: string;
+  full_name: string;
   email: string;
-  phone: string;
-  type:boolean;
+  telephone_number: string;
+  type_client: boolean;
 };
 
 type CSVRow = {
@@ -38,7 +40,7 @@ const ClientForm = () => {
   const handleCsvUpload = (): void => {
     if (csvFile) {
       Papa.parse(csvFile, {
-        complete: (result: { data: CSVRow[]; }) => {
+        complete: async (result: { data: CSVRow[] }) => {
           setCsvData(result.data as CSVRow[]); // Save the parsed CSV data
           setIsCsvParsed(true); // Mark that CSV is parsed
           console.log("CSV Data Parsed:", result.data);
@@ -49,23 +51,36 @@ const ClientForm = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent): void => {
+  const handleSubmit = async (e: React.FormEvent): void => {
     e.preventDefault();
     if (isManualEntry) {
       // Manual entry submission logic
       const newClient: Client = {
-        name: clientName,
+        full_name: clientName,
         email: clientEmail,
-        phone: clientPhone,
-        type:clientType,
-
+        telephone_number: clientPhone,
+        type_client: clientType,
       };
       console.log("Adding client:", newClient);
+
       // Add your logic to send this data to the API
     } else {
       // CSV data submission logic
       console.log("Uploading CSV data:", csvData);
       // Add your logic to send this CSV data to the API
+
+      const formattedData = csvData.map((row) => ({
+        full_name: String(row.name), // Convert to string
+        email: String(row.email), // Convert to string
+        telephone_number: String(row.phone),
+        type_client: row.type_client ? Boolean(row.type_client) : false, // Assuming phone is already a string
+      }));
+
+      const response = await createClients(formattedData);
+      if (response.success) {
+        console.log("created");
+        toast.success("Client added successfully!");
+      }
     }
   };
 

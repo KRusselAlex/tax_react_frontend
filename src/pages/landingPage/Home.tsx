@@ -2,8 +2,8 @@
 // import LanguageSelector from '../../components/Language-selector'
 import Navbar from "../../components/landing/Navbar";
 import Footer from "../../components/landing/Footer";
-import Hero from "../../components/Hero";
-import Service from "../../components/Service";
+import Hero from "../../components/landing/Hero";
+import Service from "../../components/landing/Service";
 import Progress from "../../components/Progress";
 import Testimonial from "../../components/landing/Testimonial";
 import Contact from "../../components/landing/Contact";

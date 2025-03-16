@@ -2,12 +2,15 @@ import { JSX, useState } from "react";
 import { FiFilter, FiArchive, FiTrash, FiSend } from "react-icons/fi";
 import { Dialog } from "@headlessui/react";
 import { HiDotsVertical } from "react-icons/hi";
+import { Clients } from "../types/Types";
 
 interface ClientTableProps {
   title: string;
-  data: Array<{ id: number; [key: string]: any }>;
+  data: Clients;
   modalContent: JSX.Element;
 }
+
+
 
 interface ModalProps {
   isOpen: boolean;
@@ -127,7 +130,6 @@ export default function ClientTable({
     console.log(id);
     setIsSendModalOpen(true); // Open the Send modal
   };
-
 
   const handleSendReport = () => {
     if (reportFile) {

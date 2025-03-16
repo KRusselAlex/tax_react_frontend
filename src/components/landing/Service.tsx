@@ -1,6 +1,6 @@
 const Service = () => {
   return (
-    <div className="bg-white">
+    <div id="service" className="bg-white">
       <main className="container mx-auto px-6 py-8">
         <h1 className="text-4xl font-bold text-center text-gray-900 mb-12 animate-fade-in">
           Our Accounting Services

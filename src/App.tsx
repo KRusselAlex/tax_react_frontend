@@ -7,21 +7,26 @@ import Analytics from "./pages/dashboard/Analytics";
 import ViewClient from "./pages/dashboard/client/ViewClient";
 import Setting from "./pages/dashboard/setting/Setting";
 import ClientRemind from "./pages/reminder/ClientRemind";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/auth/login" element={<Login />} />
-        <Route path="/dashboard" element={<Analytics />} />
-        <Route path="/dashboard/client" element={<ViewClient />} />
-        <Route path="/dashboard/setting" element={<Setting />} />
-        <Route path="/dashboard/remind" element={<ClientRemind />} />
-        <Route path="/dashboard/report" element={<ClientRemind />} />
-        <Route path="*" element={<Notfound />} />
-      </Routes>
-    </Router>
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/auth/login" element={<Login />} />
+          <Route path="/dashboard" element={<Analytics />} />
+          <Route path="/dashboard/client" element={<ViewClient />} />
+          <Route path="/dashboard/setting" element={<Setting />} />
+          <Route path="/dashboard/remind" element={<ClientRemind />} />
+          <Route path="/dashboard/report" element={<ClientRemind />} />
+          <Route path="*" element={<Notfound />} />
+        </Routes>
+      </Router>
+      <ToastContainer />
+    </>
   );
 }
 

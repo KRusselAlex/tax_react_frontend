@@ -2,8 +2,9 @@ import axiosInstance from "./axiosApi";
 
 
 // Create Client
-export const createClients = async (clientsData: { name: string; email: string; phone: string }[]) => {
+export const createClients = async (clientsData: { full_name: string; email: string; telephone_number: string; type_client: boolean }[]) => {
     try {
+        console.log("donner client", clientsData)
         const response = await axiosInstance.post('/clients/', { clients: clientsData });
         return response.data; // Assuming the API returns the created clients or a success message
     } catch (error) {
@@ -15,7 +16,7 @@ export const createClients = async (clientsData: { name: string; email: string; 
 // Get All Clients
 export const getClients = async () => {
     try {
-        const response = await axiosInstance.get('/clients');
+        const response = await axiosInstance.get('/clients/');
         return response.data;
     } catch (error) {
         console.error('Error fetching clients:', error);

@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import Dashtemplate from "../../../components/dashboard/Dashtemplate";
 import ClientTable from "../../../components/TableData";
 import ClientForm from "../../../components/client/AddClient";
-import axios from "axios";
+import { getClients } from "../../../services/clientApi";
+import { motion } from "framer-motion";
 
 const ViewClient = () => {
   const [clients, setClients] = useState([]);
@@ -13,7 +14,7 @@ const ViewClient = () => {
   useEffect(() => {
     const fetchClients = async () => {
       try {
-        const response = await axios.get("/api/clients"); // Replace with your API endpoint
+        const response = await getClients(); // Replace with your API endpoint
         setClients(response.data);
       } catch (error) {
         setError("Error fetching clients");
@@ -28,7 +29,16 @@ const ViewClient = () => {
 
   // Display loading or error messages if necessary
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <motion.div
+          className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"
+          initial={{ rotate: 0 }}
+          animate={{ rotate: 360 }}
+          transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+        />
+      </div>
+    );
   }
 
   if (error) {
