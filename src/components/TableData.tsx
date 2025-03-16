@@ -128,11 +128,6 @@ export default function ClientTable({
     setIsSendModalOpen(true); // Open the Send modal
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setReportFile(e.target.files[0]); // Store the selected PDF file
-    }
-  };
 
   const handleSendReport = () => {
     if (reportFile) {
