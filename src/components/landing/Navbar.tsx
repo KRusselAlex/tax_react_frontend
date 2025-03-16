@@ -22,14 +22,14 @@ export default function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaFacebook size={32} />
+              <FaFacebook size={28} />
             </a>
             <a
               href="https://www.linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaLinkedin size={32} />
+              <FaLinkedin size={28} />
             </a>
           </div>
 

@@ -16,9 +16,9 @@ const Home = () => {
   // const { t } = useTranslation()
   return (
     <div>
-      <div className="min-h-screen h-full">
+      <div className="min-h-screen h-full flex flex-col">
         <Navbar />
-        <Hero />
+        <Hero className="flex-grow" />
       </div>
 
       <Service />
