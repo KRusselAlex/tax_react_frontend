@@ -5,19 +5,11 @@ import ClientForm from "../../../components/client/AddClient";
 import { getClients } from "../../../services/clientApi";
 import { motion } from "framer-motion";
 
-interface Client {
-  id: string;
-  name: string;
-  type_client: string;
-  report_sent: boolean;
-  // add other properties here that you expect for a client
-}
 
 const ViewClient = () => {
-  const [clients, setClients] = useState<Client[]>([]); // Specify the type for clients
+  const [clients, setClients] = useState([]); // Specify the type for clients
 
   const [loading, setLoading] = useState(true);
-  const [filteredClients, setFilteredClient] = useState([]);
   const [error, setError] = useState("");
 
   // Fetch clients when the component mounts
@@ -27,10 +19,6 @@ const ViewClient = () => {
         const response = await getClients(); // Replace with your API endpoint
         console.log("data", response.data);
         setClients(response.data);
-        const dataFilter = response.data.filter(
-          (client: Client) => client.type_client && !client.report_sent
-        );
-        setFilteredClient(dataFilter);
       } catch (error) {
         setError("Error fetching clients");
         console.log(error);
@@ -41,42 +29,42 @@ const ViewClient = () => {
 
     fetchClients();
   }, []);
- // Display loading or error messages if necessary
- if (loading) {
-   return (
-     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-       <motion.div
-         className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"
-         initial={{ rotate: 0 }}
-         animate={{ rotate: 360 }}
-         transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
-       />
-     </div>
-   );
- }
+  // Display loading or error messages if necessary
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <motion.div
+          className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"
+          initial={{ rotate: 0 }}
+          animate={{ rotate: 360 }}
+          transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+        />
+      </div>
+    );
+  }
 
- if (error) {
-   return <div>{error}</div>;
- }
+  if (error) {
+    return <div>{error}</div>;
+  }
 
- return (
-   <div>
-     <Dashtemplate
-       title="Manage Clients"
-       description="Aperçu des statistiques et performances"
-     >
-       {clients ? (
-         <ClientTable
-           title="Add Client"
-           data={filteredClients}
-           modalContent={<ClientForm />}
-         />
-       ) : (
-         <>There is no Clients </>
-       )}
-     </Dashtemplate>
-   </div>
- );
+  return (
+    <div>
+      <Dashtemplate
+        title="Manage Clients"
+        description="Aperçu des statistiques et performances"
+      >
+        {clients ? (
+          <ClientTable
+            title="Add Client"
+            data={clients}
+            modalContent={<ClientForm />}
+          />
+        ) : (
+          <>There is no Clients </>
+        )}
+      </Dashtemplate>
+    </div>
+  );
 };
 
 export default ViewClient;
