@@ -35,7 +35,7 @@ const Hero = () => {
             <a
               href="#services"
               rel="noopener noreferrer"
-              className="relative flex items-center justify-center px-6 py-3 bg-buttonColor hover:bg-green-700 text-white text-lg font-semibold rounded-full shadow-lg transform hover:scale-105 transition-transform duration-200"
+              className="relative flex items-center justify-center px-6 py-3 bg-buttonColor hover:bg-buttonHover text-white text-lg font-semibold rounded-full shadow-lg transform hover:scale-105 transition-transform duration-200"
             >
               <span className="absolute inset-0 rounded-full bg-buttonColor opacity-50 animate-pulse"></span>
               <span className="relative z-10 pr-2">Request a Consultation</span>

@@ -1,7 +1,7 @@
 const Service = () => {
   return (
     <div id="service" className="bg-white">
-      <main className="container mx-auto px-6 py-8">
+      <main className="container mx-auto px-6 py-8 min-h-screen h-full flex flex-col justify-center">
         <h1 className="text-4xl font-bold text-center text-gray-900 mb-12 animate-fade-in">
           Our Accounting Services
         </h1>

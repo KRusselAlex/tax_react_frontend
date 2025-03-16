@@ -56,9 +56,15 @@ const Login = () => {
         ></div>
 
         <div className="p-6 sm:p-12">
-          <a href="../index.html" className="cursor-pointer">
-            Jes.Group
-          </a>
+          <div className="w-full flex justify-center">
+            <a
+              href="/"
+              className="cursor-pointer text-center font-semibold text-3xl "
+            >
+              Jes.Group
+            </a>
+          </div>
+
           <div className="mt-12 flex flex-col items-center">
             <div className="max-w-md w-full flex justify-start">
               <h1 className="text-2xl xl:text-3xl">Sign In</h1>

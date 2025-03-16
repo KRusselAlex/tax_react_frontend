@@ -14,7 +14,7 @@ export default function Navbar() {
   return (
     <div>
       <div className="bg-primary">
-        <div className="text-white flex justify-between items-center py-3 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-white flex justify-between items-center py-3 max-w-[110em] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Social Media Icons */}
           <div className="flex space-x-4">
             <a
@@ -22,34 +22,36 @@ export default function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaFacebook size={24} />
+              <FaFacebook size={32} />
             </a>
             <a
               href="https://www.linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaLinkedin size={24} />
+              <FaLinkedin size={32} />
             </a>
           </div>
 
           {/* Contact Info */}
-          <div className="text-sm flex gap-3 text-right">
+          <div className="text-sm md:text-lg flex gap-3 text-right">
             <p>+23746002815</p>
             <p>kouawouee@gmail.com</p>
           </div>
         </div>
       </div>
 
-      <nav className="bg-secondaryColor w-full">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16 items-center">
+      <nav className="bg-secondaryColor w-full ">
+        <div className="max-w-[110em] mx-auto px-4 sm:px-6 py-6 lg:px-8">
+          <div className="flex justify-between  items-center">
             {/* Logo */}
-            <h1 className="text-2xl font-bold text-gray-800">jes.group</h1>
+            <h1 className="text-lg md:text-4xl font-bold text-gray-800">
+              jes.group
+            </h1>
 
             {/* Desktop Menu */}
-            <div className="hidden md:flex space-x-6">
-              <a href="#home" className="text-gray-700 hover:text-blue-500">
+            <div className="hidden md:flex space-x-6 xl:mt-2 md:text-lg xl:text-3xl">
+              <a href="#home" className="text-gray-700  hover:text-blue-500">
                 Home
               </a>
               <a href="#service" className="text-gray-700 hover:text-blue-500">
@@ -66,7 +68,7 @@ export default function Navbar() {
             {/* Contact/Dashboard Button */}
             <a
               href={isAuthenticated ? "/dashboard" : "#contact"}
-              className="hidden md:block bg-primary text-white px-4 py-2 rounded-full hover:bg-buttonHover"
+              className="hidden md:block bg-primary text-lg text-white px-4 py-2 rounded-full hover:bg-buttonHover"
             >
               {isAuthenticated ? "Dashboard" : "Contact Us"}
             </a>
@@ -102,12 +104,14 @@ export default function Navbar() {
             >
               Contact
             </a>
-            <a
-              href={isAuthenticated ? "/dashboard" : "#contact"}
-              className="w-full block text-center bg-blue-500 text-white px-4 py-2 mt-2 rounded-full hover:bg-blue-600"
-            >
-              {isAuthenticated ? "Dashboard" : "Contacter Nous"}
-            </a>
+            <button className="flex mx-3 ">
+              <a
+                href={isAuthenticated ? "/dashboard" : "#contact"}
+                className="w-full block text-center bg-third text-white px-4 py-2 mt-2 rounded-full hover:bg-buttonHover"
+              >
+                {isAuthenticated ? "Dashboard" : "Contacter Nous"}
+              </a>
+            </button>
           </div>
         )}
       </nav>

@@ -8,7 +8,7 @@ export default {
     extend: {
       colors: {
         primary: "#2d4b5f",
-        secondaryColor: "#f5f5f5",
+        secondaryColor: "#F8F9FA",
         third: '#17232d',
         buttonColor: "#325872",
         buttonHover: "#71a3bf",

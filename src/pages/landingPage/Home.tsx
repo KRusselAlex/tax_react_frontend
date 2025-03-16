@@ -4,7 +4,7 @@ import Navbar from "../../components/landing/Navbar";
 import Footer from "../../components/landing/Footer";
 import Hero from "../../components/landing/Hero";
 import Service from "../../components/landing/Service";
-import Progress from "../../components/Progress";
+import Progress from "../../components/landing/Progress";
 import Testimonial from "../../components/landing/Testimonial";
 import Contact from "../../components/landing/Contact";
 import About from "../../components/landing/About";
