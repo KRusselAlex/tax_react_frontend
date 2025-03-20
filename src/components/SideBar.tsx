@@ -21,7 +21,7 @@ const Sidebar = () => {
 
   const handleLogout = () => {
     logout();
-    navigate("auth/login");
+    navigate("/auth/login");
   };
 
   const desktopNavbar = () => {

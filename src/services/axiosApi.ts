@@ -1,7 +1,11 @@
 // axiosInstance.ts
 import axios from 'axios';
+import { logout } from './authApi';
+
 
 // Create an instance of axios
+
+
 const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_API_URL, // Use your API URL
 });
@@ -31,7 +35,9 @@ axiosInstance.interceptors.response.use(
             originalRequest._retry = true;
             const refreshToken = document.cookie.split('refresh_token=')[1]?.split(';')[0];
             if (!refreshToken) {
-                throw new Error('No refresh token available');
+                logout();
+                // window.location.href = "/auth/login";
+                // throw new Error('No refresh token available');
             }
 
             try {
@@ -41,7 +47,8 @@ axiosInstance.interceptors.response.use(
                 originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
                 return axiosInstance(originalRequest);
             } catch (refreshError) {
-                return Promise.reject(refreshError);
+                logout();
+                console.log(refreshError);
             }
         }
         return Promise.reject(error);

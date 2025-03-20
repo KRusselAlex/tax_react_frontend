@@ -17,9 +17,9 @@ const Service = () => {
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M12 3v9M12 15v4m4-4h-8"
               />
             </svg>
@@ -42,9 +42,9 @@ const Service = () => {
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M4 5h16M4 10h16M4 15h16M4 20h16"
               />
             </svg>
@@ -67,9 +67,9 @@ const Service = () => {
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M8 7h12M8 11h12M8 15h12M8 19h12"
               />
             </svg>
@@ -93,9 +93,9 @@ const Service = () => {
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M9 3v2h6V3h-6zM3 7h18M3 17h18M3 12h18"
               />
             </svg>
@@ -118,9 +118,9 @@ const Service = () => {
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M9 5l3 3-3 3m0 0H3m6 0h6m4 4v4h-4m0 0H9"
               />
             </svg>
@@ -141,9 +141,9 @@ const Service = () => {
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M12 3v9M12 15v4m4-4h-8"
               />
             </svg>

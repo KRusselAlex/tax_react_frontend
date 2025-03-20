@@ -1,3 +1,4 @@
+import { ClientType } from "../types/Types";
 import axiosInstance from "./axiosApi";
 
 
@@ -36,7 +37,7 @@ export const getClientById = async (id: string) => {
 };
 
 // Update Client
-export const updateClient = async (id: number, clientData: { full_name: string; email: string; telephone_number: string }) => {
+export const updateClient = async (id: number, clientData: ClientType) => {
     try {
         const response = await axiosInstance.put(`/clients/${id}`, clientData);
         return response.data;

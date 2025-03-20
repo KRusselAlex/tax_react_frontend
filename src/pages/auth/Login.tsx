@@ -57,7 +57,7 @@ const Login = () => {
           style={{ backgroundImage: `url('${backG}')` }}
         ></div>
 
-        <div className="p-6 sm:p-12">
+        <div className="p-6 sm:p-12 flex flex-col justify-center items-centers">
           <div className="w-full flex justify-center">
             <a
               href="/"

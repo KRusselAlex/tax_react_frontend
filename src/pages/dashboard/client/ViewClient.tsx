@@ -4,7 +4,7 @@ import ClientTable from "../../../components/TableData";
 import ClientForm from "../../../components/client/AddClient";
 import { getClients } from "../../../services/clientApi";
 import { motion } from "framer-motion";
-
+import ErrorModal from "../../../components/errorModal/ErrorModal";
 
 const ViewClient = () => {
   const [clients, setClients] = useState([]); // Specify the type for clients
@@ -44,7 +44,16 @@ const ViewClient = () => {
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return (
+      <div>
+        <ErrorModal
+          onClick={function (): void {
+            throw new Error("Function not implemented.");
+          }}
+          errorMessage={error}
+        />
+      </div>
+    );
   }
 
   return (

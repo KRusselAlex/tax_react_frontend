@@ -1,7 +1,19 @@
-export interface Clients {
-    name: string;
+export interface ClientType {
+    id: number;
+    first_name: string;
+    last_name: string;
+    street_address: string;
+    city: string;
+    province: string;
+    postal_code: string;
+    country: string;
     email: string;
-    phone: string;
+    telephone_number: string;
+    type_client: boolean;
+    report_sent: boolean;
+    date_report_sent: string | Date | null;
+    date_created: Date | string;
+    date_updated: Date | string;
 }
 
 export interface Reports {
