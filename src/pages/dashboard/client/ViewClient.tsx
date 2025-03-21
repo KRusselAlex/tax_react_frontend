@@ -4,23 +4,27 @@ import ClientTable from "../../../components/TableData";
 import ClientForm from "../../../components/client/AddClient";
 import { getClients } from "../../../services/clientApi";
 import { motion } from "framer-motion";
-import ErrorModal from "../../../components/errorModal/ErrorModal";
+// import ErrorModal from "../../../components/errorModal/ErrorModal";
+import { useClientStore } from "@/store/useClientStore";
+import { useNavigate } from "react-router-dom";
 
 const ViewClient = () => {
-  const [clients, setClients] = useState([]); // Specify the type for clients
-
+  const { clients, setClients } = useClientStore();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
 
   // Fetch clients when the component mounts
+
   useEffect(() => {
     const fetchClients = async () => {
+      if (clients.length > 0) setLoading(false); // Don't fetch again if clients are already in the store
+
       try {
-        const response = await getClients(); // Replace with your API endpoint
-        console.log("data", response.data);
+        const response = await getClients();
         setClients(response.data);
       } catch (error) {
-        setError("Error fetching clients");
+        setClients([]);
+        setLoading(false);
         console.log(error);
       } finally {
         setLoading(false);
@@ -28,7 +32,7 @@ const ViewClient = () => {
     };
 
     fetchClients();
-  }, []);
+  }, [clients, setClients]);
   // Display loading or error messages if necessary
   if (loading) {
     return (
@@ -38,19 +42,6 @@ const ViewClient = () => {
           initial={{ rotate: 0 }}
           animate={{ rotate: 360 }}
           transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
-        />
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div>
-        <ErrorModal
-          onClick={function (): void {
-            throw new Error("Function not implemented.");
-          }}
-          errorMessage={error}
         />
       </div>
     );

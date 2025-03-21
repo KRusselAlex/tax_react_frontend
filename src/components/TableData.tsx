@@ -1,11 +1,11 @@
 import { JSX, useState } from "react";
-import { FiFilter, FiTrash, FiSend } from "react-icons/fi";
+import { FiFilter, FiSend } from "react-icons/fi";
 import { Dialog } from "@headlessui/react";
 import { HiDotsVertical } from "react-icons/hi";
 import sendReport from "../services/reportApi";
 import { toast } from "react-toastify";
-import { deleteClient } from "../services/clientApi";
 import { ClientType } from "../types/Types";
+import { Link } from "react-router-dom";
 
 interface ClientTableProps {
   title: string;
@@ -50,8 +50,6 @@ export default function ClientTable({
   const [selectedClients, setSelectedClients] = useState<number[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [clientToDelete, setClientToDelete] = useState<number | null>(null);
   const [isSendModalOpen, setIsSendModalOpen] = useState(false); // New state for Send modal
   const [reportFile, setReportFile] = useState<File | null>(null); // To store the uploaded PDF
   const itemsPerPage = 8;
@@ -83,75 +81,15 @@ export default function ClientTable({
     }
   };
 
-  const handleDelete = (id: number) => {
-    setClientToDelete(id);
-    setIsDeleteModalOpen(true);
-  };
-
-  const confirmDelete = async () => {
-    if (clientToDelete !== null) {
-      setClients(clients?.filter((client) => client.id !== clientToDelete));
-      const response = await deleteClient(clientToDelete);
-      console.log(response);
-      if (response.success == true) {
-        console.log("je suis ici");
-        toast.success("Client deleted successfully!");
-        setIsDeleteModalOpen(false);
-        setClientToDelete(null);
-      }
-    }
-  };
-
-  // const handleEdit = async (id: number, key: string, value: string) => {
-  //   // Update the client state locally by mapping over the clients and updating the specific client
-  //   const updatedClients = clients.map((client) =>
-  //     client.id === id ? { ...client, [key]: value } : client
-  //   );
-
-  //   // Set the updated clients state
-  //   setClients(updatedClients);
-
-  //   // Find the updated client
-  //   const updatedClient = updatedClients.find((client) => client.id === id);
-
-  //   if (updatedClient) {
-  //     // Clear the previous timeout if one exists
-  //     if (typingTimeout) {
-  //       clearTimeout(typingTimeout);
-  //     }
-
-  //     // Set a new timeout to trigger after 500ms (you can adjust the debounce time)
-  //     const timeout = setTimeout(async () => {
-  //       try {
-  //         // Send the updated client data to the backend via the updateClient function
-  //         const response = await updateClient(updatedClient.id, updatedClient);
-
-  //         // Handle the response if necessary
-  //         if (response.success) {
-  //           toast.success("Client updated successfully!");
-  //         } else {
-  //           toast.error("Failed to update client.");
-  //         }
-  //       } catch (error) {
-  //         console.error("Error updating client:", error);
-  //         toast.error("An error occurred while updating the client.");
-  //       }
-  //     }, 3000); // Adjust the delay (in ms) to suit your needs
-
-  //     // Save the timeout reference
-  //     setTypingTimeout(timeout);
-  //   }
-  // };
-
-  const filteredClients = clients.filter((c) =>
+  const filteredClients = clients?.filter((c) =>
     Object.values(c).some((value) =>
-      value.toString().toLowerCase().includes(search.toLowerCase())
+      String(value)?.toLowerCase().includes(search.toLowerCase())
     )
   );
 
-  const paginatedClients = filteredClients.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
+  const paginatedClients = filteredClients?.slice(
+    Math.max(0, (currentPage - 1) * itemsPerPage),
+    Math.max(0, currentPage * itemsPerPage)
   );
 
   const handleSendModalOpen = (id: number) => {
@@ -188,8 +126,8 @@ export default function ClientTable({
   };
 
   return (
-    <div className="">
-      <div className="flex items-center justify-between py-4">
+    <div className=" max-w-6xl mx-auto">
+      <div className="flex items-center justify-between py-4  ">
         <input
           className="border pl-4 pr-10 py-2 rounded-full w-72 focus:ring-gray-300 "
           type="text"
@@ -287,12 +225,12 @@ export default function ClientTable({
                 ))}
 
                 <td className="p-2 flex justify-center h-full mt-2 items-center space-x-2">
-                  <button
+                  <Link
+                    to={`/dashboard/client/${client.id}`}
                     className="text-buttonHover hover:text-third"
-                    onClick={() => console.log(client.id)}
                   >
                     <HiDotsVertical size={20} />
-                  </button>
+                  </Link>
                   {/* <button
                     className="text-red-500 hover:text-red-700"
                     onClick={() => handleDelete(client.id)}
@@ -346,23 +284,6 @@ export default function ClientTable({
             className="px-4 py-2 bg-buttonColor text-white rounded-full"
           >
             Send Report
-          </button>
-        </div>
-      </Modal>
-
-      {/* Delete Modal */}
-      <Modal
-        isOpen={isDeleteModalOpen}
-        onClose={() => setIsDeleteModalOpen(false)}
-      >
-        <div>
-          <h3 className="text-lg font-semibold mb-4">Confirm Delete</h3>
-          <p>Are you sure you want to delete this client?</p>
-          <button
-            onClick={confirmDelete}
-            className="px-4 py-2 mt-2 bg-red-600 text-white rounded-full"
-          >
-            Delete
           </button>
         </div>
       </Modal>

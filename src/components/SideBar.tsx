@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const location = useLocation();
-  const [widthSide, setWidthSide] = useState("14rem");
+  const [widthSide, setWidthSide] = useState("16rem");
   const [displaySide, setDisplaySide] = useState("flex");
   const [itemsAlign, setItemsAlign] = useState("start");
   const [show, setShow] = useState(true);

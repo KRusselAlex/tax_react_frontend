@@ -11,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ProtectedRoute } from "./services/ProtectedRoutes";
 import { ProtectedLogin } from "./services/ProtectLogin";
+import ClientPage from "./pages/dashboard/client/ClientPage";
 
 function App() {
   return (
@@ -58,6 +59,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <ClientRemind />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard/client/:id"
+            element={
+              <ProtectedRoute>
+                <ClientPage />
               </ProtectedRoute>
             }
           />

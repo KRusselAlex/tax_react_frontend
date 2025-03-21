@@ -31,7 +31,7 @@ export default function Setting() {
       title={"Setting"}
       description={"How to setup 404 page in React"}
     >
-      <div className=" min-h-screen p-6 mx-auto ">
+      <div className=" min-h-screen max-w-6xl  p-6 mx-auto ">
         {/* Tabs Navigation */}
         <div className="flex flex-wrap justify-center gap-3 p-4  border-b md:gap-5 ">
           {tabs.map((tab) => (

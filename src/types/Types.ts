@@ -2,7 +2,7 @@ export interface ClientType {
     id: number;
     first_name: string;
     last_name: string;
-    street_address: string;
+    Street_address: string;
     city: string;
     province: string;
     postal_code: string;
@@ -14,6 +14,19 @@ export interface ClientType {
     date_report_sent: string | Date | null;
     date_created: Date | string;
     date_updated: Date | string;
+}
+
+export interface ClientTypeCreate {
+    first_name: string;
+    last_name: string;
+    Street_address: string;
+    city: string;
+    province: string;
+    postal_code: string;
+    country: string;
+    email: string;
+    telephone_number: string;
+    type_client: boolean;
 }
 
 export interface Reports {
