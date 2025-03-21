@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { LayoutDashboard, Users, Settings, LogOut, Bell } from "lucide-react";
 import { logout } from "../services/authApi";
 import { useNavigate } from "react-router-dom";
+import Logo from "./Logo";
 
 const Sidebar = () => {
   const location = useLocation();
@@ -66,7 +67,7 @@ const Sidebar = () => {
           to="/"
           className="flex items-center gap-2 font-bold text-xl font-sans"
         >
-          Jes.Group
+          <Logo />
         </Link>
         <button
           className="text-black"
