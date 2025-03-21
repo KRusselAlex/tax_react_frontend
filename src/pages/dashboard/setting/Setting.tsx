@@ -5,35 +5,35 @@ import Dashtemplate from "../../../components/dashboard/Dashtemplate";
 
 const tabs = [
   { id: "notifications", label: "Notifications", icon: Bell },
-  { id: "users", label: "Utilisateurs", icon: Users },
-  { id: "reports", label: "Rapports", icon: FileText },
-  { id: "general", label: "Général", icon: Settings },
-  { id: "integrations", label: "Intégrations", icon: Link },
+  { id: "users", label: "Users", icon: Users },
+  { id: "reports", label: "Reports", icon: FileText },
+  { id: "general", label: "General", icon: Settings },
+  { id: "integrations", label: "Integrations", icon: Link },
 ];
 
 export default function Setting() {
   const [activeTab, setActiveTab] = useState("notifications");
   const [settings, setSettings] = useState({
-    emailTemplate: "Votre rappel d'impôt est dû bientôt.",
-    smsTemplate: "N'oubliez pas de soumettre votre déclaration fiscale.",
+    emailTemplate: "Your tax reminder is due soon.",
+    smsTemplate: "Don't forget to submit your tax return.",
     reminderDays: 7,
-    reportFrequency: "Mensuel",
+    reportFrequency: "Monthly",
     timezone: "UTC",
-    companyName: "Entreprise X",
+    companyName: "Company X",
   });
 
-  const handleChange = (e: { target: { name: string; value: string; }; }) => {
+  const handleChange = (e: { target: { name: string; value: string } }) => {
     setSettings({ ...settings, [e.target.name]: e.target.value });
   };
 
   return (
     <Dashtemplate
-      title={"Setting"}
-      description={"How to setup 404 page in React"}
+      title={"Settings"}
+      description={"Configuration of your application"}
     >
-      <div className=" min-h-screen max-w-6xl  p-6 mx-auto ">
+      <div className="min-h-screen max-w-6xl p-6 mx-auto">
         {/* Tabs Navigation */}
-        <div className="flex flex-wrap justify-center gap-3 p-4  border-b md:gap-5 ">
+        <div className="flex flex-wrap justify-center gap-3 p-4 border-b md:gap-5">
           {tabs.map((tab) => (
             <motion.button
               key={tab.id}
@@ -62,10 +62,10 @@ export default function Setting() {
           {activeTab === "notifications" && (
             <>
               <h2 className="mb-4 text-lg font-bold text-gray-700">
-                Paramètres des Notifications
+                Notification Settings
               </h2>
               <label className="block mb-1 text-sm font-semibold">
-                Modèle d'Email
+                Email Template
               </label>
               <textarea
                 name="emailTemplate"
@@ -74,7 +74,7 @@ export default function Setting() {
                 className="w-full p-2 mb-4 border rounded"
               />
               <label className="block mb-1 text-sm font-semibold">
-                Modèle de SMS
+                SMS Template
               </label>
               <textarea
                 name="smsTemplate"
@@ -83,7 +83,7 @@ export default function Setting() {
                 className="w-full p-2 mb-4 border rounded"
               />
               <label className="block mb-1 text-sm font-semibold">
-                Délai de rappel (jours avant échéance)
+                Reminder Days (days before due date)
               </label>
               <input
                 type="number"
@@ -98,10 +98,10 @@ export default function Setting() {
           {activeTab === "users" && (
             <div>
               <h2 className="mb-4 text-lg font-bold text-gray-700">
-                Gestion des Utilisateurs
+                User Management
               </h2>
               <p className="text-gray-600">
-                Ajoutez ou supprimez des administrateurs ici.
+                Add or remove administrators here.
               </p>
             </div>
           )}
@@ -109,10 +109,10 @@ export default function Setting() {
           {activeTab === "reports" && (
             <>
               <h2 className="mb-4 text-lg font-bold text-gray-700">
-                Paramètres des Rapports
+                Report Settings
               </h2>
               <label className="block mb-1 text-sm font-semibold">
-                Fréquence des rapports
+                Report Frequency
               </label>
               <select
                 name="reportFrequency"
@@ -120,9 +120,9 @@ export default function Setting() {
                 onChange={handleChange}
                 className="w-full p-2 border rounded"
               >
-                <option value="Quotidien">Quotidien</option>
-                <option value="Hebdomadaire">Hebdomadaire</option>
-                <option value="Mensuel">Mensuel</option>
+                <option value="Daily">Daily</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Monthly">Monthly</option>
               </select>
             </>
           )}
@@ -130,10 +130,10 @@ export default function Setting() {
           {activeTab === "general" && (
             <>
               <h2 className="mb-4 text-lg font-bold text-gray-700">
-                Paramètres Généraux
+                General Settings
               </h2>
               <label className="block mb-1 text-sm font-semibold">
-                Nom de l'entreprise
+                Company Name
               </label>
               <input
                 type="text"
@@ -143,7 +143,7 @@ export default function Setting() {
                 className="w-full p-2 mb-4 border rounded"
               />
               <label className="block mb-1 text-sm font-semibold">
-                Fuseau horaire
+                Timezone
               </label>
               <input
                 type="text"
@@ -158,11 +158,11 @@ export default function Setting() {
           {activeTab === "integrations" && (
             <div>
               <h2 className="mb-4 text-lg font-bold text-gray-700">
-                Intégrations
+                Integrations
               </h2>
               <p className="text-gray-600">
-                Connectez votre projet avec des services externes comme Gmail
-                API et Twilio.
+                Connect your project with external services like Gmail API and
+                Twilio.
               </p>
             </div>
           )}

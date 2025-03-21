@@ -11,8 +11,8 @@ const ClientRemind = () => {
   return (
     <div>
       <Dashtemplate
-        title="Manage Clients"
-        description="Aperçu des statistiques et performances"
+        title="Remind Clients"
+        description="Clients who have not received reports"
       >
         {clients ? (
           <ClientTable
@@ -21,7 +21,7 @@ const ClientRemind = () => {
             modalContent={<ClientForm />}
           />
         ) : (
-          <>There is no Clients </>
+          <>There are no clients</>
         )}
       </Dashtemplate>
     </div>

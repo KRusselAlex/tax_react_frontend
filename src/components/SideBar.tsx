@@ -74,7 +74,7 @@ const Sidebar = () => {
           style={{ display: show ? "block" : "none" }}
         >
           {/* Close icon */}
-          <svg
+          {/* <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             width="32"
@@ -87,7 +87,7 @@ const Sidebar = () => {
               strokeWidth="2"
               strokeLinecap="round"
             />
-          </svg>
+          </svg> */}
         </button>
         <button
           className="text-white"
@@ -95,7 +95,7 @@ const Sidebar = () => {
           style={{ display: !show ? "block" : "none" }}
         >
           {/* Open icon */}
-          <svg
+          {/* <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             width="32"
@@ -108,7 +108,7 @@ const Sidebar = () => {
               strokeWidth="2"
               strokeLinecap="round"
             />
-          </svg>
+          </svg> */}
         </button>
       </div>
       <div

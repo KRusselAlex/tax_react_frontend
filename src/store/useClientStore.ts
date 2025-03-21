@@ -2,6 +2,7 @@ import { ClientType } from "@/types/Types";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
+
 interface ClientStore {
     clients: ClientType[];
     addClientStore: (client: ClientType) => void;

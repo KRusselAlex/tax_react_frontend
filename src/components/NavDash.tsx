@@ -38,7 +38,7 @@ export default function DashboardNavbar({
 
         <div className="flex items-center gap-4">
           <div>
-            <div className="relative">
+            {/* <div className="relative">
               <input
                 className="appearance-none border pl-10 border-gray-300 hover:border-gray-400 transition-colors rounded-full w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:ring-purple-600 focus:border-purple-600 focus:shadow-outline"
                 id="username"
@@ -78,7 +78,7 @@ export default function DashboardNavbar({
                   />
                 </svg>
               </div>
-            </div>
+            </div> */}
           </div>
           <Bell className="w-6 h-6 text-gray-600 cursor-pointer hover:text-gray-900" />
           <span className="cursor-pointer" onClick={handleProfileClick}>

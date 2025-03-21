@@ -36,7 +36,8 @@ const ClientForm = () => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value, type } = e.target;
+    const checked = (e.target as HTMLInputElement).checked;
     setClient((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
@@ -72,10 +73,14 @@ const ClientForm = () => {
       if (isManualEntry) {
         console.log("client", client);
         const response = await createClients(client);
+
         if (response.success) {
-        
-          navigate("/dashboard/client");
-          toast.success("Client added successfully!");
+          const response = await getClients();
+          setClients(response.data);
+          if (response.success) {
+            navigate("/dashboard/client");
+            toast.success("Client added successfully!");
+          }
         }
       } else {
         // Log the csv data to ensure it's correct
@@ -98,7 +103,7 @@ const ClientForm = () => {
         const response = await createClients(formattedData);
         if (response.success) {
           toast.success("Clients uploaded successfully!");
-          // navigate("/dashboard/client");
+          navigate("/dashboard");
         }
       }
     } catch (error) {
@@ -106,9 +111,7 @@ const ClientForm = () => {
       setLoading(false);
       console.log(error);
     } finally {
-        const response = await getClients();
-        setClients(response.data);s
-        setLoading(false);
+      setLoading(false);
     }
   };
 
@@ -143,12 +146,12 @@ const ClientForm = () => {
                   <div key={key} className="w-full">
                     <select
                       name={key}
-                      value={client[key as keyof ClientType] as boolean}
+                      value={String(client[key as keyof ClientTypeCreate])}
                       onChange={handleChange}
                       className="border p-2 w-full my-2 rounded-lg"
                     >
-                      <option value={false}>Individual</option>
-                      <option value={true}>Company</option>
+                      <option value="false">Individual</option>
+                      <option value="true">Company</option>
                     </select>
                   </div>
                 );
@@ -159,7 +162,7 @@ const ClientForm = () => {
                     type={key === "email" ? "email" : "text"}
                     name={key}
                     placeholder={key.replace("_", " ")}
-                    value={client[key as keyof ClientType] as string}
+                    value={client[key as keyof ClientTypeCreate] as string}
                     onChange={handleChange}
                     className="border p-2 w-full my-2 rounded-lg"
                   />

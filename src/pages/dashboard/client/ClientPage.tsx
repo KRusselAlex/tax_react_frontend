@@ -21,6 +21,21 @@ import {
 import sendReport from "@/services/reportApi";
 import { deleteClient, getClients, updateClient } from "@/services/clientApi";
 
+export interface ClientTypeHere {
+  id: number;
+  first_name: string;
+  last_name: string;
+  Street_address: string;
+  city: string;
+  province: string;
+  postal_code: string;
+  country: string;
+  email: string;
+  telephone_number: string;
+  type_client: boolean;
+  report_sent: boolean;
+}
+
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -68,35 +83,36 @@ const ClientPage = () => {
     });
   };
 
+  const client = getClientById(Number(id));
   const handleSendReport = async () => {
-    if (reportFile) {
-      // Logic to upload or process the report file
-      console.log("Report sent: ", reportFile);
+    if (client) {
+      if (reportFile) {
+        // Logic to upload or process the report file
+        console.log("Report sent: ", reportFile);
 
-      console.log(client.id, reportFile);
+        console.log(client.id, reportFile);
 
-      try {
-        const response = await sendReport({
-          clients: client.id,
-          file: reportFile,
-        });
+        try {
+          const response = await sendReport({
+            clients: client.id,
+            file: reportFile,
+          });
 
-        if (response.success === true) {
-          toast.success("Report sent successfully!"); // Success toast
-        } else {
-          toast.error("Failed to send report. Please try again."); // Error toast
+          if (response.success === true) {
+            toast.success("Report sent successfully!"); // Success toast
+          } else {
+            toast.error("Failed to send report. Please try again."); // Error toast
+          }
+        } catch (error) {
+          toast.error("An error occurred while sending the report.");
+          console.log(error); // Error toast
         }
-      } catch (error) {
-        toast.error("An error occurred while sending the report.");
-        console.log(error); // Error toast
+        setIsSendModalOpen(false); // Close the modal after sending
+      } else {
+        toast.error("Please upload a report file."); // Error toast if no file is uploaded
       }
-      setIsSendModalOpen(false); // Close the modal after sending
-    } else {
-      toast.error("Please upload a report file."); // Error toast if no file is uploaded
     }
   };
-
-  const client = getClientById(Number(id));
 
   useEffect(() => {
     if (!client) {
@@ -129,7 +145,7 @@ const ClientPage = () => {
   };
 
   const confirmDelete = async () => {
-    if (client !== null) {
+    if (client) {
       const response = await deleteClient(client.id);
       deleteClientStore(client.id);
 
@@ -146,44 +162,42 @@ const ClientPage = () => {
   };
 
   const handleUpdate = async () => {
-    setLoading(true);
-    try {
-      console.log("Updating client:", formData);
-      if (client) {
-        updateClientStore(client.id, formData);
-      }
-      const response = await updateClient(client.id, formData);
-      // Handle the response if necessary
-      if (response.success) {
-        const response = await getClients();
-        setClients(response.data);
-        toast.success("Client updated successfully!");
-      } else {
-        toast.error("Failed to update client.");
+    if (client) {
+      setLoading(true);
+      try {
+        console.log("Updating client:", formData);
+        if (client) {
+          updateClientStore(client.id, formData);
+        }
+        const response = await updateClient(client.id, formData);
+        // Handle the response if necessary
+        if (response.success) {
+          const response = await getClients();
+          setClients(response.data);
+          toast.success("Client updated successfully!");
+        } else {
+          toast.error("Failed to update client.");
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error("Error updating client:", error);
+        toast.error("An error occurred while updating the client.");
+        setLoading(false);
+      } finally {
         setLoading(false);
       }
-    } catch (error) {
-      console.error("Error updating client:", error);
-      toast.error("An error occurred while updating the client.");
-      setLoading(false);
-    } finally {
-      setLoading(false);
     }
   };
 
   if (loading) {
     return (
-      <div className="fixed inset-0 flex items-center justify-center  bg-black bg-opacity-50">
-        <div className=" p-6 w-80 rounded-lg shadow-lg">
-          <div className="flex justify-center items-center">
-            <motion.div
-              className="w-12 h-12 border-4 border-third border-t-transparent rounded-full animate-spin"
-              initial={{ rotate: 0 }}
-              animate={{ rotate: 360 }}
-              transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
-            />
-          </div>
-        </div>
+      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <motion.div
+          className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"
+          initial={{ rotate: 0 }}
+          animate={{ rotate: 360 }}
+          transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+        />
       </div>
     );
   }
@@ -191,7 +205,7 @@ const ClientPage = () => {
   return (
     <Dashtemplate
       title={"CLIENT"}
-      description="Aperçu des statistiques et performances"
+      description="A Client information"
     >
       <div className="flex flex-col justify-center items-center p-8">
         <div className="flex justify-center md:justify-end items-center mb-4">
@@ -225,7 +239,7 @@ const ClientPage = () => {
                   <Label className="capitalize">{key.replace(/_/g, " ")}</Label>
                   <Input
                     name={key}
-                    value={formData[key as keyof ClientType] ?? ""}
+                    value={String(formData[key as keyof ClientTypeHere] ?? "")}
                     onChange={handleChange}
                   />
                 </div>

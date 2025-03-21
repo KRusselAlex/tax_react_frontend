@@ -52,7 +52,7 @@ export default function ClientTable({
   const [currentPage, setCurrentPage] = useState(1);
   const [isSendModalOpen, setIsSendModalOpen] = useState(false); // New state for Send modal
   const [reportFile, setReportFile] = useState<File | null>(null); // To store the uploaded PDF
-  const itemsPerPage = 8;
+  const itemsPerPage = 7;
   const [uniqueClient, setUniqueClient] = useState(0);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
