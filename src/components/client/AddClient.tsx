@@ -1,30 +1,48 @@
 import { useState } from "react";
-import Papa from "papaparse"; // for parsing CSV files
-import { createClients } from "../../services/clientApi";
+import Papa from "papaparse";
+import { createClients, getClients } from "../../services/clientApi";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
-type Client = {
-  full_name: string;
-  email: string;
-  telephone_number: string;
-  type_client: boolean;
-};
+import { ClientTypeCreate } from "@/types/Types";
+import { useClientStore } from "@/store/useClientStore";
+import { motion } from "framer-motion";
 
 type CSVRow = {
   [key: string]: string | number;
 };
 
 const ClientForm = () => {
-  const [isManualEntry, setIsManualEntry] = useState<boolean>(true); // Toggle between manual entry and Excel upload
-  const [clientName, setClientName] = useState<string>("");
-  const [clientEmail, setClientEmail] = useState<string>("");
-  const [clientPhone, setClientPhone] = useState<string>("");
-  const [clientType, setClientType] = useState<boolean>(false);
+  const [isManualEntry, setIsManualEntry] = useState<boolean>(true);
+  const [loading, setLoading] = useState(false);
+
+  const { setClients } = useClientStore();
+  const [client, setClient] = useState<ClientTypeCreate>({
+    first_name: "",
+    last_name: "",
+    Street_address: "",
+    city: "",
+    province: "",
+    postal_code: "",
+    country: "Canada",
+    email: "",
+    telephone_number: "",
+    type_client: false,
+  });
   const [csvFile, setCsvFile] = useState<File | null>(null);
   const [csvData, setCsvData] = useState<CSVRow[]>([]);
-  const [isCsvParsed, setIsCsvParsed] = useState<boolean>(false); // State to track if CSV is parsed
+  const [isCsvParsed, setIsCsvParsed] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value, type } = e.target;
+    const checked = (e.target as HTMLInputElement).checked;
+    setClient((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     if (e.target.files) {
@@ -32,112 +50,131 @@ const ClientForm = () => {
     }
   };
 
-  const handleClientTypeChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    const value = event.target.value;
-    setClientType(value === "1"); // true if "Company" is selected, false if "individual" is selected
-  };
-
   const handleCsvUpload = (): void => {
     if (csvFile) {
       Papa.parse(csvFile, {
         complete: async (result: { data: CSVRow[] }) => {
-          setCsvData(result.data as CSVRow[]); // Save the parsed CSV data
-          setIsCsvParsed(true); // Mark that CSV is parsed
-          console.log("CSV Data Parsed:", result.data);
+          console.log("Parsed CSV Data:", result.data); // Add logging to see the raw CSV data
+          setCsvData(result.data as CSVRow[]);
+          setIsCsvParsed(true);
         },
         header: true,
         skipEmptyLines: true,
+        dynamicTyping: true, // Enable dynamic typing to convert numbers correctly
       });
     }
   };
 
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    if (isManualEntry) {
-      // Manual entry submission logic
-      const newClient: Client = {
-        full_name: clientName,
-        email: clientEmail,
-        telephone_number: clientPhone,
-        type_client: clientType,
-      };
-      console.log("Adding client:", newClient);
-      const response = await createClients(newClient);
-      if (response.success) {
-        console.log("created");
-        toast.success("Client added successfully!");
+
+    try {
+      setLoading(true);
+      if (isManualEntry) {
+        console.log("client", client);
+        const response = await createClients(client);
+
+        if (response.success) {
+          const response = await getClients();
+          setClients(response.data);
+          if (response.success) {
+            navigate("/dashboard/client");
+            toast.success("Client added successfully!");
+          }
+        }
+      } else {
+        // Log the csv data to ensure it's correct
+        console.log("Formatted CSV Data:", csvData);
+
+        const formattedData = csvData.map((row) => ({
+          first_name: String(row.first_name),
+          last_name: String(row.last_name),
+          Street_address: String(row.Street_address),
+          city: String(row.city),
+          province: String(row.province),
+          postal_code: String(row.postal_code),
+          country: String(row.country),
+          email: String(row.email),
+          telephone_number: String(row.telephone_number),
+          type_client: row.type_client ? Boolean(row.type_client) : false,
+        }));
+        console.log("data csv", formattedData);
+
+        const response = await createClients(formattedData);
+        if (response.success) {
+          toast.success("Clients uploaded successfully!");
+          navigate("/dashboard");
+        }
       }
-
-      // Add your logic to send this data to the API
-    } else {
-      // CSV data submission logic
-      console.log("Uploading CSV data:", csvData);
-      // Add your logic to send this CSV data to the API
-
-      const formattedData = csvData.map((row) => ({
-        full_name: String(row.name), // Convert to string
-        email: String(row.email), // Convert to string
-        telephone_number: String(row.phone),
-        type_client: row.type_client ? Boolean(row.type_client) : false, // Assuming phone is already a string
-      }));
-
-      const response = await createClients(formattedData);
-      if (response.success) {
-        console.log("created");
-        toast.success("Client added successfully!");
-        navigate("/dashboard/client");
-      }
+    } catch (error) {
+      toast.error("Failed to create user. Please try again.");
+      setLoading(false);
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
+  if (loading) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center  bg-black bg-opacity-50">
+        <div className=" p-6 w-80 rounded-lg shadow-lg">
+          <div className="flex justify-center items-center">
+            <motion.div
+              className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"
+              initial={{ rotate: 0 }}
+              animate={{ rotate: 360 }}
+              transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="p-6 bg-white  rounded-xl">
-      <h2 className="text-lg font-bold">
+    <div className="p-6 bg-white rounded-xl w-full md:w-[600px] mx-auto">
+      <h2 className="text-lg font-bold w-full">
         {isManualEntry ? "Add New Client" : "Upload Clients via Excel"}
       </h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="w-full">
         {isManualEntry ? (
-          <>
-            <div className="max-w-md">
-              <input
-                type="text"
-                placeholder="Client Name"
-                value={clientName}
-                onChange={(e) => setClientName(e.target.value)}
-                className="border p-2 w-full my-2 rounded-lg"
-              />
-              <input
-                type="email"
-                placeholder="Client Email"
-                value={clientEmail}
-                onChange={(e) => setClientEmail(e.target.value)}
-                className="border p-2 w-full my-2 rounded-lg"
-              />
-              <select
-                name="type"
-                id=""
-                onChange={handleClientTypeChange}
-                className="border p-2 w-full my-2 rounded-lg"
-              >
-                <option value="0">individual</option>
-                <option value="1">Company</option>
-              </select>
-              <input
-                type="text"
-                placeholder="Phone Number"
-                value={clientPhone}
-                onChange={(e) => setClientPhone(e.target.value)}
-                className="border p-2 w-full my-2 rounded-lg"
-              />
-            </div>
-          </>
+          <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4 w-full">
+            {Object.keys(client).map((key) => {
+              if (key === "type_client") {
+                return (
+                  <div key={key} className="w-full">
+                    <select
+                      name={key}
+                      value={String(client[key as keyof ClientTypeCreate])}
+                      onChange={handleChange}
+                      className="border p-2 w-full my-2 rounded-lg"
+                    >
+                      <option value="false">Individual</option>
+                      <option value="true">Company</option>
+                    </select>
+                  </div>
+                );
+              }
+              return (
+                <div key={key} className="w-full">
+                  <input
+                    type={key === "email" ? "email" : "text"}
+                    name={key}
+                    placeholder={key.replace("_", " ")}
+                    value={client[key as keyof ClientTypeCreate] as string}
+                    onChange={handleChange}
+                    className="border p-2 w-full my-2 rounded-lg"
+                  />
+                </div>
+              );
+            })}
+          </div>
         ) : (
           <>
             <input
               type="file"
-              accept=".csv,.xlsx"
+              accept=".csv"
               onChange={handleFileChange}
               className="border p-2 w-full my-2"
             />
@@ -150,35 +187,43 @@ const ClientForm = () => {
             </button>
           </>
         )}
-
         {isCsvParsed && csvData.length > 0 && (
           <div className="mt-4">
             <h3 className="text-lg font-semibold">CSV Data Preview</h3>
-            <table className="w-full border mt-2">
-              <thead className="bg-gray-200">
-                <tr>
-                  {Object.keys(csvData[0]).map((key) => (
-                    <th key={key} className="p-2 border">
-                      {key}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {csvData.map((row, idx) => (
-                  <tr key={idx}>
-                    {Object.values(row).map((value, index) => (
-                      <td key={index} className="p-2 border">
-                        {value}
-                      </td>
-                    ))}
+
+            <div className="overflow-x-auto max-h-[500px] border rounded-lg">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr>
+                    {csvData.length > 0 &&
+                      Object.keys(csvData[0]).map((key, index) => (
+                        <th key={index} className="p-2 border bg-gray-100">
+                          {key.replace(/_/g, " ")}
+                        </th>
+                      ))}
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {csvData.map((row, idx) => (
+                    <tr key={idx}>
+                      {Object.entries(row).map(([key, value], index) => (
+                        <td key={index} className="p-2 border">
+                          {key === "type_client"
+                            ? (typeof value === "string" &&
+                                value.toLowerCase() === "true") ||
+                              (typeof value === "boolean" && value === true)
+                              ? "Company"
+                              : "Individual"
+                            : value}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
-
         <div className="flex space-x-4 mt-4">
           <button
             type="button"

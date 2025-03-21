@@ -45,6 +45,8 @@ export const login = async (email: string, password: string) => {
 
         const accessToken = data.data.access;
         localStorage.setItem('access_token', accessToken);
+        localStorage.setItem('username', JSON.stringify(data.data.username));
+        localStorage.setItem('email', data.data.email);
 
 
         // Set the refresh token as an HttpOnly cookie

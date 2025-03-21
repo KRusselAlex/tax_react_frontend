@@ -1,7 +1,8 @@
+import Logo from "../Logo";
 
 const Footer = () => {
   return (
-    <footer className="bg-primary">
+    <footer className="bg-primaryColor">
       <div className="container  mx-auto p-0 md:p-8 xl:px-0">
         <div className="mx-auto max-w-[110em] px-6 pb-10 pt-16">
           <div className="xl:grid xl:grid-cols-3 xl:gap-8">
@@ -10,7 +11,7 @@ const Footer = () => {
                 <a href="/">
                   <div className="flex items-center space-x-2 text-2xl font-medium">
                     <span className="text-white text-3xl text-semibold">
-                      Jes.Group
+                      <Logo />
                     </span>
                   </div>
                 </a>
@@ -209,7 +210,7 @@ const Footer = () => {
               <span className="text-gray-50">♥</span> by AlexRussel enthusiasts
               at
               <a rel="noopener" href="#Home">
-                Jes.Group
+                lT.consult
               </a>
             </div>
           </div>

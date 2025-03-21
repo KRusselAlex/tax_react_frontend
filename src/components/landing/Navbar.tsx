@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
+import Logo from "../Logo";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +15,7 @@ export default function Navbar() {
 
   return (
     <div>
-      <div className="bg-primary">
+      <div className="bg-primaryColor">
         <div className="text-white flex justify-between items-center py-3 max-w-[110em] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Social Media Icons */}
           <div className="flex space-x-4">
@@ -34,19 +36,19 @@ export default function Navbar() {
           </div>
 
           {/* Contact Info */}
-          <div className="text-sm md:text-lg flex gap-3 text-right">
-            <p>+23746002815</p>
-            <p>kouawouee@gmail.com</p>
+          <div className="text-xs  md:text-lg flex flex-col md:flex-row gap-2 text-right">
+            <p>+1 514-217-8361</p>
+            <p>leontitne.toumno@hec.ca</p>
           </div>
         </div>
       </div>
 
       <nav className="bg-secondaryColor w-full ">
         <div className="max-w-[110em] mx-auto px-4 sm:px-6 py-6 lg:px-8">
-          <div className="flex justify-between  items-center">
+          <div className="flex \ justify-between  items-center">
             {/* Logo */}
             <h1 className="text-lg md:text-2xl 2xl:text-4xl font-bold text-gray-800">
-              jes.group
+              <Logo />
             </h1>
 
             {/* Desktop Menu */}
@@ -66,12 +68,12 @@ export default function Navbar() {
             </div>
 
             {/* Contact/Dashboard Button */}
-            <a
-              href={isAuthenticated ? "/dashboard" : "#contact"}
-              className="hidden md:block bg-primary text-lg text-white px-4 py-2 rounded-full hover:bg-buttonHover"
+            <Link
+              to={isAuthenticated ? "/dashboard" : "#contact"}
+              className="hidden md:block bg-primaryColor text-lg text-white px-4 py-2 rounded-full hover:bg-buttonHover"
             >
               {isAuthenticated ? "Dashboard" : "Contact Us"}
-            </a>
+            </Link>
 
             {/* Mobile Menu Button */}
             <button
@@ -105,12 +107,12 @@ export default function Navbar() {
               Contact
             </a>
             <button className="flex mx-3 ">
-              <a
-                href={isAuthenticated ? "/dashboard" : "#contact"}
+              <Link
+                to={isAuthenticated ? "/dashboard" : "#contact"}
                 className="w-full block text-center bg-third text-white px-4 py-2 mt-2 rounded-full hover:bg-buttonHover"
               >
                 {isAuthenticated ? "Dashboard" : "Contacter Nous"}
-              </a>
+              </Link>
             </button>
           </div>
         )}

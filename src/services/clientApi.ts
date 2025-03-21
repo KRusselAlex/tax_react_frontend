@@ -1,14 +1,16 @@
+import { ClientType, ClientTypeCreate } from "../types/Types";
 import axiosInstance from "./axiosApi";
 
-
 // Create Client
-export const createClients = async (clientsData: { full_name: string; email: string; telephone_number: string; type_client: boolean }[] | { full_name: string; email: string; telephone_number: string; type_client: boolean }) => {
+
+export const createClients = async (clientsData: ClientTypeCreate[] | ClientTypeCreate) => {
     try {
         console.log("donner client", clientsData)
         const response = await axiosInstance.post('/clients/', clientsData);
+        console.log("response", response.data)
         return response.data; // Assuming the API returns the created clients or a success message
     } catch (error) {
-        console.error('Error creating clients:', error);
+        console.log('Error creating clients:', error);
         throw error;
     }
 };
@@ -36,8 +38,10 @@ export const getClientById = async (id: string) => {
 };
 
 // Update Client
-export const updateClient = async (id: number, clientData: { full_name: string; email: string; telephone_number: string }) => {
+export const updateClient = async (id: number, clientData: ClientType) => {
+
     try {
+        console.log("uodate", clientData)
         const response = await axiosInstance.put(`/clients/${id}`, clientData);
         return response.data;
     } catch (error) {

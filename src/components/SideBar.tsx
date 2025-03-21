@@ -6,14 +6,14 @@ import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const location = useLocation();
-  const [widthSide, setWidthSide] = useState("14rem");
+  const [widthSide, setWidthSide] = useState("16rem");
   const [displaySide, setDisplaySide] = useState("flex");
   const [itemsAlign, setItemsAlign] = useState("start");
   const [show, setShow] = useState(true);
   const navigate = useNavigate();
 
   const mobileNavbar = () => {
-    setWidthSide("4rem");
+    setWidthSide("5rem");
     setDisplaySide("none");
     setShow(false);
     setItemsAlign("center");
@@ -21,7 +21,7 @@ const Sidebar = () => {
 
   const handleLogout = () => {
     logout();
-    navigate("auth/login");
+    navigate("/auth/login");
   };
 
   const desktopNavbar = () => {
@@ -69,11 +69,25 @@ const Sidebar = () => {
           Jes.Group
         </Link>
         <button
-          className="text-white"
+          className="text-black"
           onClick={mobileNavbar}
           style={{ display: show ? "block" : "none" }}
         >
           {/* Close icon */}
+          {/* <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="32"
+            height="32"
+            fill="currentColor"
+          >
+            <path
+              d="M3 6h18M3 12h18M3 18h18"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          </svg> */}
         </button>
         <button
           className="text-white"
@@ -81,6 +95,20 @@ const Sidebar = () => {
           style={{ display: !show ? "block" : "none" }}
         >
           {/* Open icon */}
+          {/* <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="32"
+            height="32"
+            fill="currentColor"
+          >
+            <path
+              d="M3 6h18M3 12h18M3 18h18"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          </svg> */}
         </button>
       </div>
       <div
