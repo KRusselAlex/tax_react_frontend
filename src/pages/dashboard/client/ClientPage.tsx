@@ -10,6 +10,7 @@ import { ClientType } from "@/types/Types";
 import { toast } from "react-toastify";
 import { Dialog } from "@headlessui/react";
 import Dashtemplate from "@/components/dashboard/Dashtemplate";
+import { motion } from "framer-motion";
 import {
   Select,
   SelectContent,
@@ -53,6 +54,7 @@ const ClientPage = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isSendModalOpen, setIsSendModalOpen] = useState(false); // New state for Send modal
   const [reportFile, setReportFile] = useState<File | null>(null); // To store the uploaded PDF
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const formatDate = (dateString: string | null | undefined) => {
@@ -134,22 +136,22 @@ const ClientPage = () => {
       console.log(response);
       if (response.success == true) {
         console.log("je suis ici");
-         const response = await getClients();
-         setClients(response.data);
+        const response = await getClients();
+        setClients(response.data);
         toast.success("Client deleted successfully!");
         setIsDeleteModalOpen(false);
         navigate("/dashboard/clients");
-
       }
     }
   };
 
   const handleUpdate = async () => {
-    console.log("Updating client:", formData);
-    if (client) {
-      updateClientStore(client.id, formData);
-    }
+    setLoading(true);
     try {
+      console.log("Updating client:", formData);
+      if (client) {
+        updateClientStore(client.id, formData);
+      }
       const response = await updateClient(client.id, formData);
       // Handle the response if necessary
       if (response.success) {
@@ -158,14 +160,33 @@ const ClientPage = () => {
         toast.success("Client updated successfully!");
       } else {
         toast.error("Failed to update client.");
+        setLoading(false);
       }
     } catch (error) {
       console.error("Error updating client:", error);
       toast.error("An error occurred while updating the client.");
+      setLoading(false);
+    } finally {
+      setLoading(false);
     }
   };
 
-
+  if (loading) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center  bg-black bg-opacity-50">
+        <div className=" p-6 w-80 rounded-lg shadow-lg">
+          <div className="flex justify-center items-center">
+            <motion.div
+              className="w-12 h-12 border-4 border-third border-t-transparent rounded-full animate-spin"
+              initial={{ rotate: 0 }}
+              animate={{ rotate: 360 }}
+              transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <Dashtemplate

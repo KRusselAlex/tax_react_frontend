@@ -1,7 +1,7 @@
 
 const Footer = () => {
   return (
-    <footer className="bg-primary">
+    <footer className="bg-primaryColor">
       <div className="container  mx-auto p-0 md:p-8 xl:px-0">
         <div className="mx-auto max-w-[110em] px-6 pb-10 pt-16">
           <div className="xl:grid xl:grid-cols-3 xl:gap-8">

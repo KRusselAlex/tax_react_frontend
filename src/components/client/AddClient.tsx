@@ -23,7 +23,7 @@ const ClientForm = () => {
     city: "",
     province: "",
     postal_code: "",
-    country: "canada",
+    country: "Canada",
     email: "",
     telephone_number: "",
     type_client: false,
@@ -73,8 +73,7 @@ const ClientForm = () => {
         console.log("client", client);
         const response = await createClients(client);
         if (response.success) {
-          const response = await getClients();
-          setClients(response.data);
+        
           navigate("/dashboard/client");
           toast.success("Client added successfully!");
         }
@@ -94,18 +93,22 @@ const ClientForm = () => {
           telephone_number: String(row.telephone_number),
           type_client: row.type_client ? Boolean(row.type_client) : false,
         }));
+        console.log("data csv", formattedData);
 
         const response = await createClients(formattedData);
         if (response.success) {
           toast.success("Clients uploaded successfully!");
-          navigate("/dashboard/client");
+          // navigate("/dashboard/client");
         }
       }
     } catch (error) {
       toast.error("Failed to create user. Please try again.");
+      setLoading(false);
       console.log(error);
     } finally {
-      setLoading(false);
+        const response = await getClients();
+        setClients(response.data);s
+        setLoading(false);
     }
   };
 
@@ -127,7 +130,7 @@ const ClientForm = () => {
   }
 
   return (
-    <div className="p-6 bg-white rounded-xl w-full md:min-w-[500px] mx-auto">
+    <div className="p-6 bg-white rounded-xl w-full md:w-[600px] mx-auto">
       <h2 className="text-lg font-bold w-full">
         {isManualEntry ? "Add New Client" : "Upload Clients via Excel"}
       </h2>
@@ -168,7 +171,7 @@ const ClientForm = () => {
           <>
             <input
               type="file"
-              accept=".csv,.xlsx"
+              accept=".csv"
               onChange={handleFileChange}
               className="border p-2 w-full my-2"
             />
@@ -180,6 +183,43 @@ const ClientForm = () => {
               Upload Excel/CSV
             </button>
           </>
+        )}
+        {isCsvParsed && csvData.length > 0 && (
+          <div className="mt-4">
+            <h3 className="text-lg font-semibold">CSV Data Preview</h3>
+
+            <div className="overflow-x-auto max-h-[500px] border rounded-lg">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr>
+                    {csvData.length > 0 &&
+                      Object.keys(csvData[0]).map((key, index) => (
+                        <th key={index} className="p-2 border bg-gray-100">
+                          {key.replace(/_/g, " ")}
+                        </th>
+                      ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {csvData.map((row, idx) => (
+                    <tr key={idx}>
+                      {Object.entries(row).map(([key, value], index) => (
+                        <td key={index} className="p-2 border">
+                          {key === "type_client"
+                            ? (typeof value === "string" &&
+                                value.toLowerCase() === "true") ||
+                              (typeof value === "boolean" && value === true)
+                              ? "Company"
+                              : "Individual"
+                            : value}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         )}
         <div className="flex space-x-4 mt-4">
           <button

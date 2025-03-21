@@ -17,7 +17,7 @@ const Card: React.FC<CardProps> = ({
     <div className="p-4 flex items-center gap-4 border rounded-xl bg-white">
       {Icon && <Icon size={28} className={`${color} `} />}
       <div>
-        <p className="text-lg text-primary font-medium">{title}</p>
+        <p className="text-lg text-primaryColor font-medium">{title}</p>
         <p className="text-2xl font-medium text-buttonColor">{number}</p>
       </div>
     </div>

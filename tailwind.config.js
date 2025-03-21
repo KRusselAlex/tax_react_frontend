@@ -12,6 +12,7 @@ export default {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))'
         },
+        primaryColor: '#007bff',
         secondaryColor: '#F8F9FA',
         third: '#17232d',
         buttonColor: '#325872',

@@ -4,13 +4,11 @@ import ClientTable from "../../../components/TableData";
 import ClientForm from "../../../components/client/AddClient";
 import { getClients } from "../../../services/clientApi";
 import { motion } from "framer-motion";
-// import ErrorModal from "../../../components/errorModal/ErrorModal";
 import { useClientStore } from "@/store/useClientStore";
-import { useNavigate } from "react-router-dom";
+
 
 const ViewClient = () => {
   const { clients, setClients } = useClientStore();
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
   // Fetch clients when the component mounts

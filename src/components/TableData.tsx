@@ -258,7 +258,7 @@ export default function ClientTable({
               onClick={() => setCurrentPage(page + 1)}
               className={`px-3 py-1 rounded ${
                 currentPage === page + 1
-                  ? "bg-primary text-white"
+                  ? "bg-primaryColor text-white"
                   : "bg-gray-300"
               }`}
             >

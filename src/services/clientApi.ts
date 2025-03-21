@@ -1,16 +1,17 @@
-import { ClientType } from "../types/Types";
+import { ClientType, ClientTypeCreate } from "../types/Types";
 import axiosInstance from "./axiosApi";
 
 // Create Client
 
-export const createClients = async (clientsData: ClientType[] | ClientType) => {
+export const createClients = async (clientsData: ClientTypeCreate[] | ClientTypeCreate) => {
     try {
         console.log("donner client", clientsData)
         const response = await axiosInstance.post('/clients/', clientsData);
+        console.log("response", response.data)
         return response.data; // Assuming the API returns the created clients or a success message
     } catch (error) {
-        console.error('Error creating clients:', error);
-        // throw error;
+        console.log('Error creating clients:', error);
+        throw error;
     }
 };
 

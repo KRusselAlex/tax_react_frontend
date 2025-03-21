@@ -32,7 +32,7 @@ export default function DashboardNavbar({
     <div className="w-full flex justify-center">
       <nav className="flex items-center py-4 w-full max-w-6xl bg-secondaryColor justify-between">
         <div>
-          <h1 className="text-5xl text-primary">{title}</h1>
+          <h1 className="text-5xl text-primaryColor">{title}</h1>
           <p className="text-sm text-gray-500">{description}</p>
         </div>
 
