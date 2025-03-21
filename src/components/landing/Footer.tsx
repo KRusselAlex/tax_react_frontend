@@ -1,3 +1,4 @@
+import Logo from "../Logo";
 
 const Footer = () => {
   return (
@@ -10,7 +11,7 @@ const Footer = () => {
                 <a href="/">
                   <div className="flex items-center space-x-2 text-2xl font-medium">
                     <span className="text-white text-3xl text-semibold">
-                      Jes.Group
+                      <Logo />
                     </span>
                   </div>
                 </a>
@@ -209,7 +210,7 @@ const Footer = () => {
               <span className="text-gray-50">♥</span> by AlexRussel enthusiasts
               at
               <a rel="noopener" href="#Home">
-                Jes.Group
+                lT.consult
               </a>
             </div>
           </div>

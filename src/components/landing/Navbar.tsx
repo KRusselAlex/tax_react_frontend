@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
 import Logo from "../Logo";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -67,12 +68,12 @@ export default function Navbar() {
             </div>
 
             {/* Contact/Dashboard Button */}
-            <a
-              href={isAuthenticated ? "/dashboard" : "#contact"}
+            <Link
+              to={isAuthenticated ? "/dashboard" : "#contact"}
               className="hidden md:block bg-primaryColor text-lg text-white px-4 py-2 rounded-full hover:bg-buttonHover"
             >
               {isAuthenticated ? "Dashboard" : "Contact Us"}
-            </a>
+            </Link>
 
             {/* Mobile Menu Button */}
             <button
@@ -106,12 +107,12 @@ export default function Navbar() {
               Contact
             </a>
             <button className="flex mx-3 ">
-              <a
-                href={isAuthenticated ? "/dashboard" : "#contact"}
+              <Link
+                to={isAuthenticated ? "/dashboard" : "#contact"}
                 className="w-full block text-center bg-third text-white px-4 py-2 mt-2 rounded-full hover:bg-buttonHover"
               >
                 {isAuthenticated ? "Dashboard" : "Contacter Nous"}
-              </a>
+              </Link>
             </button>
           </div>
         )}

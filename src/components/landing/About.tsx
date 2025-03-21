@@ -55,7 +55,6 @@ const About = () => {
                 Address: 601 Capuchon Way, Ottawa, ON K4A 0W2
               </p>
             </div>
-
             <div className="relative">
               <img
                 className="absolute inset-x-0 bottom-0 -mb-48 -translate-x-1/2 left-1/2"
@@ -66,7 +65,7 @@ const About = () => {
               <img
                 className="relative w-full xl:max-w-lg xl:mx-auto 2xl:origin-bottom 2xl:scale-110"
                 src="https://cdn.rareblocks.xyz/collection/celebration/images/team/1/business-woman.png"
-                alt="Leontine Toumno"
+                alt=""
               />
             </div>
           </div>
