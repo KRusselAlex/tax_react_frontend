@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { login } from "../../services/authApi";
 import { toast } from "react-toastify";
 import { Eye, EyeOff } from "lucide-react";
+import Logo from "@/components/Logo";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -59,12 +60,12 @@ const Login = () => {
 
         <div className="p-6 sm:p-12 flex flex-col justify-center items-centers">
           <div className="w-full flex justify-center">
-            <a
-              href="/"
+            <Link
+              to="/"
               className="cursor-pointer text-center font-semibold text-3xl "
             >
-              Jes.Group
-            </a>
+              <Logo />
+            </Link>
           </div>
 
           <div className="mt-12 flex flex-col items-center">
