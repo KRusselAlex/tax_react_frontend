@@ -1,11 +1,13 @@
 import { JSX, useState } from "react";
 import { FiFilter, FiSend } from "react-icons/fi";
+import { FaBell } from "react-icons/fa";
 import { Dialog } from "@headlessui/react";
 import { HiDotsVertical } from "react-icons/hi";
 import sendReport from "../services/reportApi";
 import { toast } from "react-toastify";
 import { ClientType } from "../types/Types";
 import { Link } from "react-router-dom";
+import sendNotification from "@/services/notificationApi";
 
 interface ClientTableProps {
   title: string;
@@ -78,6 +80,21 @@ export default function ClientTable({
       setSelectedClients([]);
     } else {
       setSelectedClients(clients.map((client) => client.id));
+    }
+  };
+
+  const handleRemind = async (id: number) => {
+    console.log("the id ", id);
+    try {
+      const response = await sendNotification(id);
+      if (response.success === true) {
+        toast.success("Reminder sent successfully!"); // Success toast
+      } else {
+        toast.error("Failed to send reminder. Please try again."); // Error toast
+      }
+    } catch (error) {
+      toast.error("An error occurred while sending the reminder.");
+      console.log(error); // Error toast
     }
   };
 
@@ -231,12 +248,12 @@ export default function ClientTable({
                   >
                     <HiDotsVertical size={20} />
                   </Link>
-                  {/* <button
-                    className="text-red-500 hover:text-red-700"
-                    onClick={() => handleDelete(client.id)}
+                  <button
+                    className="text-yellow-500 hover:text-yellow-700"
+                    onClick={() => handleRemind(client.id)}
                   >
-                    <FiTrash size={20} />
-                  </button> */}
+                    <FaBell size={20} />
+                  </button>
                   <button
                     className="text-green-500 hover:text-green-700"
                     onClick={() => handleSendModalOpen(client.id)}

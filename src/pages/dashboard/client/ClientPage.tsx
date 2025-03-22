@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Trash2, Send } from "lucide-react";
 import { ClientType } from "@/types/Types";
 import { toast } from "react-toastify";
+import { FaBell } from "react-icons/fa";
 import { Dialog } from "@headlessui/react";
 import Dashtemplate from "@/components/dashboard/Dashtemplate";
 import { motion } from "framer-motion";
@@ -20,6 +21,7 @@ import {
 } from "@/components/ui/select";
 import sendReport from "@/services/reportApi";
 import { deleteClient, getClients, updateClient } from "@/services/clientApi";
+import sendNotification from "@/services/notificationApi";
 
 export interface ClientTypeHere {
   id: number;
@@ -161,6 +163,22 @@ const ClientPage = () => {
     }
   };
 
+  const handleRemind = async () => {
+    if (client) {
+      try {
+        const response = await sendNotification(client.id);
+        if (response.success === true) {
+          toast.success("Reminder sent successfully!"); // Success toast
+        } else {
+          toast.error("Failed to send reminder. Please try again."); // Error toast
+        }
+      } catch (error) {
+        toast.error("An error occurred while sending the reminder.");
+        console.log(error); // Error toast
+      }
+    }
+  };
+
   const handleUpdate = async () => {
     if (client) {
       setLoading(true);
@@ -203,17 +221,20 @@ const ClientPage = () => {
   }
 
   return (
-    <Dashtemplate
-      title={"CLIENT"}
-      description="A Client information"
-    >
+    <Dashtemplate title={"CLIENT"} description="A Client information">
       <div className="flex flex-col justify-center items-center p-8">
-        <div className="flex justify-center md:justify-end items-center mb-4">
+        <div className="flex flex-col md:flex-row justify-center gap-4 md:justify-end items-center mb-4">
           <Button
             onClick={() => setIsSendModalOpen(true)}
             className="bg-green-500 text-white flex items-center gap-2"
           >
             <Send size={18} /> Send Report
+          </Button>
+          <Button
+            onClick={handleRemind}
+            className="bg-yellow-500 text-white flex items-center gap-2"
+          >
+            <FaBell size={18} /> Send Reminder
           </Button>
         </div>
         <Card className="w-full max-w-6xl border rounded-xl shadow-none">
@@ -249,7 +270,7 @@ const ClientPage = () => {
               <div>
                 <Label>Type Client</Label>
                 <Select
-                  value={formData.report_sent ? "true" : "false"}
+                  value={formData.type_client ? "true" : "false"}
                   onValueChange={(value) => {
                     let vals = true;
                     if (value == "false") {
