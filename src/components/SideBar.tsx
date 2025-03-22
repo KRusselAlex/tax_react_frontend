@@ -63,10 +63,7 @@ const Sidebar = () => {
       className="flex flex-col gap-3 min-h-screen bg-[#3d6d8c] text-white px-6"
     >
       <div className="flex items-center gap-2 border-b border-gray-400 pl-4 py-4 mt-3 justify-between">
-        <Link
-          to="/"
-          className="flex items-center gap-2 font-bold text-xl font-sans"
-        >
+        <Link to="/" className="flex items-center gap-2 font-bold  font-sans">
           <Logo />
         </Link>
         <button
