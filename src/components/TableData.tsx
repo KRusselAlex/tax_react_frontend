@@ -93,7 +93,9 @@ export default function ClientTable({
         toast.error("Failed to send reminder. Please try again."); // Error toast
       }
     } catch (error) {
-      toast.error("An error occurred while sending the reminder.");
+       toast.error(
+         "An error occurred while sending the reminder, check if the phone number is from canada and is correct ."
+       );
       console.log(error); // Error toast
     }
   };
