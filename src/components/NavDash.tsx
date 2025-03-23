@@ -17,7 +17,7 @@ export default function DashboardNavbar({
 
   const handleLogout = () => {
     logout();
-    navigate("auth/login");
+    navigate("/auth/login");
   };
 
   const handleProfileClick = () => {

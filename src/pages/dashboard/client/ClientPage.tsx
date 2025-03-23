@@ -101,6 +101,8 @@ const ClientPage = () => {
           });
 
           if (response.success === true) {
+            const response = await getClients();
+            setClients(response.data);
             toast.success("Report sent successfully!"); // Success toast
           } else {
             toast.error("Failed to send report. Please try again."); // Error toast
@@ -148,17 +150,25 @@ const ClientPage = () => {
 
   const confirmDelete = async () => {
     if (client) {
-      const response = await deleteClient(client.id);
-      deleteClientStore(client.id);
+      setLoading(true);
+      try {
+        const response = await deleteClient(client.id);
+        deleteClientStore(client.id);
 
-      console.log(response);
-      if (response.success == true) {
-        console.log("je suis ici");
-        const response = await getClients();
-        setClients(response.data);
-        toast.success("Client deleted successfully!");
-        setIsDeleteModalOpen(false);
-        navigate("/dashboard/clients");
+        if (response.success == true) {
+          console.log("je suis ici");
+          const response = await getClients();
+          setClients(response.data);
+          toast.success("Client deleted successfully!");
+          setIsDeleteModalOpen(false);
+          navigate("/dashboard/client");
+        }
+      } catch (error) {
+        console.error("Error deleting client:", error);
+        toast.error("An error occurred while deleting the client.");
+        setLoading(false);
+      } finally {
+        setLoading(false);
       }
     }
   };
